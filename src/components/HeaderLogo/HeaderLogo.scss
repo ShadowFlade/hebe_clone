@@ -1,15 +1,21 @@
+$letterCount:5;
 .header-logo{
 	&__letter{
-		animation: fadeIn .5s calc(var(--index) * .5s) forwards;
 		position:relative;
 		transition: opacity 2s linear;
-		animation-fill-mode: forwards;  
 		opacity:0;
 		display:inline-block;
 		padding:3px;
-		font-size:2rem;
-
+		color:white;
+		font-size:4rem;
+		&--animated{
+			animation: fadeIn .5s calc(var(--index) * .5s) both,
+			fadeOut .5s calc( (var(--negativeIndex) * .5s) + calc(.5s * $letterCount))
+			forwards;
+			animation-fill-mode: forwards;  
+		}
 	}
+
 }
 
 @keyframes fadeIn {

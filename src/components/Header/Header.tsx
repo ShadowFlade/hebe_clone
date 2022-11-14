@@ -11,12 +11,18 @@ type Header= {
 
 const  Header:React.FC<Header> = () => {
 	 const isAuthorized = false;
+	 const [animated,setAnimated] = useState(true);
+	 const logoText = 'hebe.';
+	 const animationInterval = setInterval(()=>{
+		setAnimated(!animated);
+	 },6000);
+	 
 	return (
 		<header className='header'>
 				<Container>
 					<div className="header__inner">
 						<div className="header__logo">
-							<HeaderLogo logoText='hebe.'></HeaderLogo>
+							<HeaderLogo animated={animated} logoText={logoText}></HeaderLogo>
 						</div>
 						<div className="header__menu">
 							<HeaderMenu menuItems={['shop','brands','my boyfriends snack','staff edit']}/>
