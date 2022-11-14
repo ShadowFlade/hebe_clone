@@ -1,11 +1,10 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 import App from './App';
-const root = document.querySelector('#root');
+import './styles/index.scss';
+import './styles/nullstyle.css';
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Falied to find the root element');
 
-ReactDOM.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>,
-	root
-);
+const root = createRoot(rootElement);
+root.render(<App/>);

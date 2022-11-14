@@ -1,2 +1,7 @@
 import React from 'react';
-export default function Layout() {}
+import Header from './components/Header/Header';
+export default function Layout() {
+	return <div className="layout">
+		<Header authorized={false}></Header>
+	</div>
+}

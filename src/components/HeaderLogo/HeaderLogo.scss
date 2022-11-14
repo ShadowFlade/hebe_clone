@@ -1,0 +1,34 @@
+.header-logo{
+	&__letter{
+		animation: fadeIn .5s calc(var(--index) * .5s) forwards;
+		position:relative;
+		transition: opacity 2s linear;
+		animation-fill-mode: forwards;  
+		opacity:0;
+		display:inline-block;
+		padding:3px;
+		font-size:2rem;
+
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity:0;
+	}
+	100%{
+		opacity:1;
+	}
+}
+
+@keyframes fadeOut{
+	100%{
+		opacity:0;
+	}
+	0%{
+		opacity:1;
+	}
+}
+	
+
+
