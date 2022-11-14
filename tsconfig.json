@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"jsx": "react",
+		"lib": ["es6", "dom", "DOM", "DOM.Iterable", "ESNext"],
+		"module": "es2020",
+		"composite": true,
+		"target": "es2015",
+		"sourceMap": true,
+		"moduleResolution": "node",
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"baseUrl": "src",
+		"skipLibCheck": true,
+		"types": ["react/next","react-dom/next"],
+		"paths": {
+			"@/*": ["*"]
+		},
+		"downlevelIteration": true,
+		"allowSyntheticDefaultImports": true
+	},
+	// "include": ["src", "src/custom.d.ts", "src/types.d.ts"],
+	"exclude": ["node_modules"],
+	// "typeRoots": ["./types"]
+}
