@@ -43,7 +43,7 @@ const config = {
 			{
 				test: /\.svg$/,
 				exclude: /node_modules/,
-				use: ['@svgr/webpack'],
+				use: [{loader:'@svgr/webpack',options: { icon: true }}],
 			},
 			{
 				test: /\.tsx?$/,

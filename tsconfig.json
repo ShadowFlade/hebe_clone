@@ -20,7 +20,7 @@
 		"downlevelIteration": true,
 		"allowSyntheticDefaultImports": true
 	},
-	// "include": ["src", "src/custom.d.ts", "src/types.d.ts"],
+	"include": ["src", "src/types/types.d.ts", "src/types.d.ts"],
 	"exclude": ["node_modules"],
-	// "typeRoots": ["./types"]
+	"typeRoots": ["./src/types"]
 }
