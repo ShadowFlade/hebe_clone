@@ -9,6 +9,7 @@ type HeaderAuth = {
 }
 
 const HeaderAuth = ({isAuthorized}:HeaderAuth) => {
+	
 	return (
 		<div className="header-auth">
 			<div className="header-auth__items">

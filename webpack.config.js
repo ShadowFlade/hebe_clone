@@ -65,7 +65,7 @@ const config = {
 			{
 				test: /\.scss$/,
 				use: [
-					MiniCssExtractPlugin.loader,
+					isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 					{
 						loader: 'css-loader',
 						options: { sourceMap: true },

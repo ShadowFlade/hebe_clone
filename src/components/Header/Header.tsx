@@ -25,7 +25,8 @@ const  Header:React.FC<Header> = () => {
 							<HeaderLogo animated={animated} logoText={logoText}></HeaderLogo>
 						</div>
 						<div className="header__menu">
-							<HeaderMenu menuItems={['shop','brands','my boyfriends snack','staff edit']}/>
+							<HeaderMenu menuItems={[{text:'shop'},{text:'brands'},
+								{text:'my boyfriends snack'},{text:'staff edit'}]}/>
 						</div>
 						<div className="header__auth">
 							<HeaderAuth isAuthorized={isAuthorized}></HeaderAuth>
