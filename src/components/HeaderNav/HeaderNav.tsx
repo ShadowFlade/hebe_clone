@@ -1,9 +1,10 @@
+import { nanoid } from 'nanoid';
 import React, { useRef } from 'react';
 import HeaderMenuColumn from '../HeaderMenuColumn/HeaderMenuColumn';
 import HeaderMenuDropdown from '../HeaderMenuDropdown/HeaderMenuDropdown';
 import './HeaderNav.scss'; 
 
-type HeaderNav = {
+export type HeaderNavProps = {
 	menuItems:menuItem[];
 }
 
@@ -19,7 +20,7 @@ const column1 = {items:[{text:'smth',link:'slkdjf'},{text:'smth',link:'slkdjf'},
 ],title:'haj'};
 const columns = [column1]
 
-export default function HeaderNav({menuItems}:HeaderNav){
+export default function HeaderNav({menuItems}:HeaderNavProps){
 	const menuDropdown = useRef<HTMLDivElement | null>(null);
 	return (
 		<ul className="header-menu">
@@ -30,10 +31,9 @@ export default function HeaderNav({menuItems}:HeaderNav){
 								{item.text}
 							</a>
 							<div ref={menuDropdown} className="header-menu__dropdown">
-								<HeaderMenuDropdown columns={columns as HeaderMenuColumn[]}/> 
+								<HeaderMenuDropdown key={nanoid()} columns={columns as HeaderMenuColumn[]}/> 
 								{/* TODO костыль, убрать affirmation */}
 							</div>
-							
 							
 						</li>
 					)

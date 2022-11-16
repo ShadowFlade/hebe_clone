@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
 import Container from '../Container/Container';
 import HeaderMenuColumn from '../HeaderMenuColumn/HeaderMenuColumn';
@@ -14,7 +15,7 @@ const HeaderMenuDropdown = ({columns}:HeaderMenuDropdown) => {
 				<div className="header-menu-dropdown__inner">
 					{columns?.map(column=>{
 						return (
-							<HeaderMenuColumn title={column.title} items={column.items}
+							<HeaderMenuColumn key={nanoid()} title={column.title} items={column.items}
 						/>)
 					})}
 				</div>
