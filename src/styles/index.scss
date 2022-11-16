@@ -9,3 +9,36 @@ html{
 body{
 	width: 100%;
 }
+
+@font-face {
+	font-family: "Noto Serif Oriya";
+	src: url('../fonts/Noto_Serif_Oriya/NotoSerifOriya-Regular.ttf') format('ttf');
+	font-weight:400;
+	font-style:normal;
+	font-display:swap;
+}
+
+@font-face {
+	font-family: "Noto Serif Oriya";
+	src: url('../fonts/Noto_Serif_Oriya/NotoSerifOriya-Medium.ttf') format('ttf');
+	font-weight:500;
+	font-style:normal;
+	font-display:swap;
+}
+
+@font-face {
+	font-family: "Noto Serif Oriya";
+	src: url('../fonts/Noto_Serif_Oriya/NotoSerifOriya-SemiBold.ttf') format('ttf');
+	font-weight:600;
+	font-style:normal;
+	font-display:swap;
+}
+
+@font-face {
+	font-family: "Noto Serif Oriya";
+	src: url('../fonts/Noto_Serif_Oriya/NotoSerifOriya-700.ttf') format('ttf');
+	font-weight:700;
+	font-style:normal;
+	font-display:swap;
+}
+
