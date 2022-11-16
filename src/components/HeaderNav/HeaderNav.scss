@@ -2,25 +2,37 @@ $itemColor:white;
 .header-menu{
 	display:flex;
 	margin-inline:auto;
+	height: 61px;
 	&__item{
 		text-align: center;
 		text-transform: uppercase;
 		letter-spacing: 2px;
 		font-size: 1em;
-		padding: 7.5px 0;
-		margin-right:1rem;
+		padding: 7.5px 1.5rem;
 		color:$itemColor;
 		cursor:pointer;
 		position:relative;
-		display:block;
+		display: flex;
+		align-items: center;
 		&:last-child{
 			margin-right: 0;
 		};
 		&:hover{
-			&::after{
-				width:100%;
+			& > .header-menu__dropdown{
+				display:block;
 			}
 		}
+
+	}
+	&__dropdown{
+		display:none;
+		position: absolute;
+		bottom:0;
+	}
+	&__link{
+		color:inherit;
+		padding: 10px 0;
+		position: relative;
 		&::after{
 			height:1px;
 			content:'';
@@ -31,10 +43,12 @@ $itemColor:white;
 			width:0px;
 			transition:width .15s cubic-bezier(0.55, 0.085, 0.68, 0.53);
 		}
-	}
-	&__link{
-		color:inherit;
+		&:hover{
+			&::after{
+				width: 100%;
+			}
+		}
+
 	}
 
 }
-

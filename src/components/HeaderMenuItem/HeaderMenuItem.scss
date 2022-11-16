@@ -1,0 +1,9 @@
+.header-menu-dropdown__item{
+	padding:.5rem .2rem;
+	text-align:left;
+	text-transform: capitalize;
+	margin-top:.5rem;
+	&:first-child{
+		margin-top:0;
+	}
+}

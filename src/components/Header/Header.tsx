@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './Header.scss';
 
 import HeaderLogo from '../HeaderLogo/HeaderLogo'; 
-import HeaderMenu from '../HeaderMenu/HeaderMenu';
 import Container from '../Container/Container';
 import HeaderAuth from '../HeaderAuth/HeaderAuth';
+import HeaderNav from '../HeaderNav/HeaderNav';
 type Header= {
 	authorized:boolean
 };
@@ -25,7 +25,7 @@ const  Header:React.FC<Header> = () => {
 							<HeaderLogo animated={animated} logoText={logoText}></HeaderLogo>
 						</div>
 						<div className="header__menu">
-							<HeaderMenu menuItems={[{text:'shop'},{text:'brands'},
+							<HeaderNav menuItems={[{text:'shop'},{text:'brands'},
 								{text:'my boyfriends snack'},{text:'staff edit'}]}/>
 						</div>
 						<div className="header__auth">
@@ -33,8 +33,6 @@ const  Header:React.FC<Header> = () => {
 						</div>
 					</div>
 				</Container>
-			
-
 		</header>
 	)
 }
