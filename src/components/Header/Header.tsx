@@ -5,12 +5,24 @@ import HeaderLogo from '../HeaderLogo/HeaderLogo';
 import Container from '../Container/Container';
 import HeaderAuth from '../HeaderAuth/HeaderAuth';
 import HeaderNav, { HeaderNavProps } from '../HeaderNav/HeaderNav';
+import HeaderMenuColumn from '../HeaderMenuColumn/HeaderMenuColumn';
 type Header= {
 	authorized:boolean
 };
+const column1 = {items:[{text:'smth',link:'slkdjf'},{text:'smth',link:'slkdjf'},
+{text:'smth',link:'slkdjf'},{text:'smth',link:'slkdjf'},
+{text:'smth',link:'slkdjf'},{text:'smth',link:'slkdjf'}
+],title:'haj'} as HeaderMenuColumn;
+const column2 = {items:[{text:'hello',link:'slkdjf'},{text:'im',link:'slkdjf'},
+{text:'john',link:'slkdjf'},{text:'also',link:'slkdjf'},
+{text:'hellow',link:'slkdjf'},{text:'world',link:'slkdjf'}
+],title:'haj'} as HeaderMenuColumn;
+const columns = [column1];
 
-const menuItems  = [
-	{text:'shop',},{text:'brands'},
+const columns2 = [column2];
+
+const menuItems   = [
+	{text:'shop',dropdownMenu:{columns:columns2}},{text:'brands',dropdownMenu:{columns:columns}},
 	{text:'my boyfriends snack'},{text:'staff edit'}
 ] 
 

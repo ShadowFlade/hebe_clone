@@ -14,25 +14,20 @@ type menuItem = {
 	dropdownMenu?:HeaderMenuDropdown;
 }
 
-const column1 = {items:[{text:'smth',link:'slkdjf'},{text:'smth',link:'slkdjf'},
-{text:'smth',link:'slkdjf'},{text:'smth',link:'slkdjf'},
-{text:'smth',link:'slkdjf'},{text:'smth',link:'slkdjf'}
-],title:'haj'};
-const columns = [column1]
+
 
 export default function HeaderNav({menuItems}:HeaderNavProps){
 	const menuDropdown = useRef<HTMLDivElement | null>(null);
 	return (
-		<ul className="header-menu">
+		<ul className="header-nav">
 				{menuItems.map(item=>{
 					return(
-						<li className="header-menu__item">
-							<a href={item.link || '/'} className="header-menu__link">
+						<li className="header-nav__item">
+							<a href={item.link || '/'} className="header-nav__link">
 								{item.text}
 							</a>
-							<div ref={menuDropdown} className="header-menu__dropdown">
-								<HeaderMenuDropdown key={nanoid()} columns={columns as HeaderMenuColumn[]}/> 
-								{/* TODO костыль, убрать affirmation */}
+							<div ref={menuDropdown} className="header-nav__dropdown">
+									 {<HeaderMenuDropdown key={nanoid()} columns={item.dropdownMenu?.columns as HeaderMenuColumn[]}/> }
 							</div>
 							
 						</li>
