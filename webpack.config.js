@@ -43,7 +43,7 @@ const config = {
 			{
 				test: /\.svg$/,
 				exclude: /node_modules/,
-				use: ['@svgr/webpack'],
+				use: [{loader:'@svgr/webpack',options: { icon: true }}],
 			},
 			{
 				test: /\.tsx?$/,
@@ -65,7 +65,7 @@ const config = {
 			{
 				test: /\.scss$/,
 				use: [
-					MiniCssExtractPlugin.loader,
+					isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 					{
 						loader: 'css-loader',
 						options: { sourceMap: true },

@@ -1,0 +1,15 @@
+$icon:1.1em;
+.header-auth{
+	&__items{
+		display:flex;
+		justify-content: space-between;
+	}
+	&__item{
+		margin-inline:1rem;
+	}
+	&__icon{ 
+		fill:white; 
+		width:$icon;
+		height:$icon;
+	}
+} 
