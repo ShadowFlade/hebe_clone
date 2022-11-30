@@ -13,11 +13,6 @@ const BigPictureMainPage = ({ title }: BigPictureMainPage) => {
 			<img
 				className="big-picture__img"
 				src={bigPic}
-				// srcSet='3024w 3024w,
-				// 9C2E854B-A72E-416A-9257-910D5EAFB3F3_180x.avif 180w'
-				// sizes="(max-width: 3204px) 2048px,
-				// (max-width: 2048px) 2048px,
-				// 800px"
 				alt=""
 			/>
 			<div className="big-picture__container">

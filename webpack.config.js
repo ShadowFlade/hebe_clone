@@ -44,24 +44,6 @@ const config = {
 				test: /\.(woff|woff2|eot|ttf|otf)$/i,
 				type: 'asset/resource',
 			  },
-			// {
-			// 	test: /\.(woff|woff2)$/,
-			// 	use: {
-			// 	  loader: 'url-loader',
-			// 	},
-			// },
-			// {
-			// 	test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-			// 	use: [
-			// 	  {
-			// 		loader: 'file-loader',
-			// 		options: {
-			// 		  name: '[name].[ext]',
-			// 		  outputPath: 'fonts/'
-			// 		}
-			// 	  }
-			// 	]
-			// },
 			{
 				test: /\.svg$/,
 				exclude: /node_modules/,
