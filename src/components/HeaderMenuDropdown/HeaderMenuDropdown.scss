@@ -1,13 +1,14 @@
 .header-menu-dropdown {
 	width: 100%;
 	background-color: var(--colorNav);
-	position: fixed;
+	position: absolute;
 	bottom: top;
 	font-size: 0.7em;
 	color: inherit;
 	left: 0;
 	width: 100vw;
 	padding: 1.5rem 3rem 2rem 0.5rem;
+
 	&__inner {
 		display: flex;
 		justify-content: space-between;
