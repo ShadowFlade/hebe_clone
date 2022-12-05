@@ -1,3 +1,6 @@
+:root{
+	--delay:.3s;
+}
 .big-banner{
 	padding:6rem 8rem;
 	&__inner{
@@ -8,5 +11,20 @@
 		font-size:1.34375rem;
 		text-align: center;
 		line-height:3;
+		padding:1.5rem 26rem;
+		opacity:0;
+		animation:reveal 1.5s forwards var(--delay);
+	}
+
+	
+}
+
+@keyframes reveal {
+	from{
+		translate: 0 20px;
+	}
+	to {
+		translate:none;
+		opacity:1
 	}
 }
