@@ -63,6 +63,12 @@ $margin:100px;
 	&--out-of-focus .swiper-button-next, &--out-of-focus .swiper-button-prev {
 		animation: toBottom .15s ease-in forwards;
 	}
+	.swiper{
+		padding:3rem 0;
+	}
+	.swiper-horizontal > .swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {
+		bottom:0px;
+	}
 
 }
 

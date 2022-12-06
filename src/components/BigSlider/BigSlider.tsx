@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y, Navigation,SwiperOptions  } from 'swiper';
+import { A11y, Navigation,Scrollbar, SwiperOptions  } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/scrollbar';
 import SliderBigItem from '../SliderBigItem/SliderBigItem';
 import woman from './woman.jpg';
 import woman1 from './woman1.jpg';
@@ -80,7 +81,8 @@ const BigSlider = ({spaceBetween,slidesPerView}:SwiperOptions) => {
 	},[])
 	
 	return (
-		<div className={`big-slider ${isInFocus ? 'big-slider--in-focus' : 'big-slider--out-of-focus'}`} onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter}>
+		<div className={`big-slider ${isInFocus ? 'big-slider--in-focus' : 'big-slider--out-of-focus'}`} 
+		onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter}>
 			<div className="big-slider__titles">
 				<h2 className="big-slider__title">Must Haves</h2>
 				<h3 className="big-slider__subtitle">Some of our favourite picks this week.</h3>
@@ -91,16 +93,18 @@ const BigSlider = ({spaceBetween,slidesPerView}:SwiperOptions) => {
 					<Swiper 
 						spaceBetween={spaceBetween} 
 						slidesPerView={slidesPerView}
-						modules={[Navigation, A11y]}
+						modules={[Navigation, A11y,Scrollbar]}
 						navigation
+						scrollbar={{draggable:true}}
 						createElements
 						watchSlidesProgress
 						speed={200}
 					>	
-							{slides.map(({img,sizes,name,section,price},index) => {
+							{slides.map(({img,sizes,name,section,price}) => {
 								return (
 									<SwiperSlide key={nanoid()}>
-											<SliderBigItem img={img} sizes={sizes} name={name} section={section} price={price}/>
+											<SliderBigItem img={img} sizes={sizes} name={name} 
+											section={section} price={price}/>
 									</SwiperSlide>
 								)
 							})}
