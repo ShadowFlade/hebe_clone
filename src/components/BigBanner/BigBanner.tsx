@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './BigBanner.scss';
 type BigBannerProps = {
 	text:string;
@@ -13,16 +13,21 @@ const BigBanner = ({text,backgroundColor} : BigBannerProps) => {
 		rootMargin: '0px',
 		threshold: 0
 	  }
-	  const toggleTextClasses = () => {
-		setIsIntersecting(!isIntersecting);
+	  const toggleTextClasses = (intersectingEntries:IntersectionObserverEntry[]) => {
+		const entry = intersectingEntries[0];
+		entry.isIntersecting ? setIsIntersecting(true) : setIsIntersecting(false); 
 	  }
 	  let observer = new IntersectionObserver(toggleTextClasses, options);
-	  textRef.current ?  observer.observe(textRef.current) : null;
+	  useEffect(()=>{
+		textRef.current ?  observer.observe(textRef.current) : null;
+	  },[])
+	  console.log(textRef.current);
+
 	  
 	return (
 		<section className="big-banner" style={{backgroundColor}}>
 			<div className="big-banner__inner">
-				<p ref={textRef} className={`big-banner__text ${isIntersecting ? 'big-banner__text--revealing' : null}`}>
+				<p ref={textRef} className={`big-banner__text ${isIntersecting ? 'big-banner__text--revealing' : ''}`}>
 					{text}
 				</p>
 			</div>

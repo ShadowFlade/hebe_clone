@@ -13,7 +13,9 @@
 		line-height:3;
 		padding:1.5rem 26rem;
 		opacity:0;
-		animation:reveal 1.5s forwards var(--delay);
+		&--revealing{
+			animation:reveal .9s forwards var(--delay);
+		}
 	}
 
 	
