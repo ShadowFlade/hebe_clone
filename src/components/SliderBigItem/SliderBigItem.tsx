@@ -24,7 +24,11 @@ const SliderBigItem = ({img,sizes,name,section,price} : SliderBigItemProps) => {
 					<p className="slider-big-item__sizes">
 						{sizes.map(size=>{
 							return (
-								<span className='slider-big-item__size'>{size}</span>
+								<p className='slider-big-item__size'>
+									<span>
+										{size}
+									</span>
+								</p>
 							)
 						})}
 					</p>

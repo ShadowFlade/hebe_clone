@@ -13,6 +13,7 @@
 		line-height:3;
 		padding:1.5rem 26rem;
 		opacity:0;
+		color:rgb(51, 48, 41);
 		&--revealing{
 			animation:reveal .9s forwards var(--delay);
 		}
