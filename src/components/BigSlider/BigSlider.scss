@@ -1,6 +1,19 @@
+$margin:50px;
 .big-slider{
 	padding:7.5rem 0;
-	&__inner{
-
+	&__container--moved{
+		margin-left:-$margin;
 	}
+	.swiper-slide:first-child.swiper-slide-visible{
+		margin-left:$margin;
+	}
+	.swiper-slide{
+		padding-inline:4rem;
+	}
+	
+
+}
+
+.slider-big-item__img{
+	max-height:500px;
 }

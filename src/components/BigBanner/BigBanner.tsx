@@ -21,8 +21,6 @@ const BigBanner = ({text,backgroundColor} : BigBannerProps) => {
 	  useEffect(()=>{
 		textRef.current ?  observer.observe(textRef.current) : null;
 	  },[])
-	  console.log(textRef.current);
-
 	  
 	return (
 		<section className="big-banner" style={{backgroundColor}}>

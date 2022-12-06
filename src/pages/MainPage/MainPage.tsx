@@ -19,7 +19,7 @@ const MainPage = ({}:MainPage) => {
 				<BigBanner text={text} backgroundColor="white"/>		
 			</div>
 			<div className="main-page__slider">
-				<BigSlider spaceBetween={20} slidesPerView={3}/>
+				<BigSlider spaceBetween={60} slidesPerView={3} />
 			</div>
 		</Fragment>
 	)
