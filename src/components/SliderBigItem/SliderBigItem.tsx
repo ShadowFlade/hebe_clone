@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './SliderBigItem.scss';
 type  SliderBigItemProps = {
 	img:string;
 	sizes:string[];
@@ -16,8 +16,10 @@ const SliderBigItem = ({img,sizes,name,section,price} : SliderBigItemProps) => {
 					<img src={img} className="slider-big-item__img"/>
 				</div>
 				<div className="slider-big-item__info">
-					<p className="slider-big-item_name">{name}</p>
-					<p className="slider-big-item__section">{section}</p>
+					<div className="slider-big-item__name-section">
+						<p className="slider-big-item__name">{name}</p>
+						<p className="slider-big-item__section">{section}</p>
+					</div>
 					<p className="slider-big-item__price">{price}</p>
 					<p className="slider-big-item__sizes">
 						{sizes.map(size=>{

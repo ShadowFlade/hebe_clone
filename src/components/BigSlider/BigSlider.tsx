@@ -71,11 +71,22 @@ const slides = [
 
 
 const BigSlider = ({spaceBetween,slidesPerView}:SwiperOptions) => {
-	const [isFirstSlideVisible, setIsFristSlideVisible] = useState(false);
+	const [isInFocus,setIsInFocus] = useState(false);
+	const onMouseEnter  = React.useCallback((e:React.MouseEvent) => {
+		setIsInFocus(true);
+	},[])
+	const onMouseLeave  = React.useCallback((e:React.MouseEvent) => {
+		setIsInFocus(false);
+	},[])
+	
 	return (
-		<div className="big-slider">
+		<div className={`big-slider ${isInFocus ? 'big-slider--in-focus' : 'big-slider--out-of-focus'}`} onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter}>
+			<div className="big-slider__titles">
+				<h2 className="big-slider__title">Must Haves</h2>
+				<h3 className="big-slider__subtitle">Some of our favourite picks this week.</h3>
+			</div>
+
 			<div className="big-slider__inner">
-				{/* <div className={`big-slider__container ${!isFirstSlideVisible ? 'big-slider__container--moved' : ''}`}> */}
 
 					<Swiper 
 						spaceBetween={spaceBetween} 
@@ -83,9 +94,8 @@ const BigSlider = ({spaceBetween,slidesPerView}:SwiperOptions) => {
 						modules={[Navigation, A11y]}
 						navigation
 						createElements
-						slidesPerGroup={4}
-						slidesPerGroupSkip={4}
 						watchSlidesProgress
+						speed={200}
 					>	
 							{slides.map(({img,sizes,name,section,price},index) => {
 								return (
@@ -96,7 +106,6 @@ const BigSlider = ({spaceBetween,slidesPerView}:SwiperOptions) => {
 							})}
 
 					</Swiper>
-				{/* </div> */}
 
 			</div>
 		</div>
