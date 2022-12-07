@@ -14,7 +14,6 @@ import woman1 from './woman1.jpg';
 
 import woman2 from './woman2.jpg';
 import woman2_1 from './woman2_1.jpg';
-import woman2_2 from './woman2_2.jpg';
 import woman2_3 from './woman2_3.jpg';
 import woman2_4 from './woman2_4.jpg';
 import woman2_5 from './woman2_5.jpg';
@@ -69,7 +68,7 @@ const slides = [
 	},
 	{
 		img:woman2,
-		extraImg:[woman2_1,woman2_2,woman2_3,woman2_4,woman2_5,woman2_6],
+		extraImg:[woman2_1,woman2_3,woman2_4,woman2_5,woman2_6],
 		sizes:['M','L'],
 		name:'Cali Midi Dress',
 		section:'Cartel & Willow ',
@@ -139,11 +138,11 @@ const BigSlider = ({spaceBetween,slidesPerView}:SwiperOptions) => {
 						watchSlidesProgress
 						speed={200}
 					>	
-							{slides.map(({img,sizes,name,section,price}) => {
+							{slides.map(({img,sizes,name,section,price,extraImg}) => {
 								return (
 									<SwiperSlide key={nanoid()}>
 											<SliderBigItem img={img} sizes={sizes} name={name} 
-											section={section} price={price}/>
+											section={section} price={price} extraImg={extraImg} />
 									</SwiperSlide>
 								)
 							})}
