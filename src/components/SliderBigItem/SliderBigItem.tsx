@@ -49,7 +49,13 @@ const SliderBigItem = ({img,sizes,name,section,price,extraImg} : SliderBigItemPr
 		<div className="slider-big-item">
 			<div className="slider-big-item__inner">
 				<div className="slider-big-item__photo" onMouseEnter={startAutoplay}>
-						<img src={currImg} className="slider-big-item__img"/>
+						<Swiper>
+							{extraImg?.map(item=>{
+								return <SwiperSlide>
+									<img src={item} alt="" />
+								</SwiperSlide>
+							})}
+						</Swiper>
 				</div>
 				<div className="slider-big-item__info">
 					<div className="slider-big-item__name-section">
