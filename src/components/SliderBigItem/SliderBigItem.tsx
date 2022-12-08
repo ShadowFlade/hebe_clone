@@ -20,12 +20,17 @@ const SliderBigItem = ({img,sizes,name,section,price,extraImg} : SliderBigItemPr
 	extraImg ?  extraImg.unshift(img) : null;
 	const swiperRef = useRef<SwiperRef | null>(null)
 	const controlSwiperAutoplay = (swiper:Swiper) => {
-		swiper.autoplay.pause();
+		console.log(swiper);
+		 if (!isAnimating){
+			swiper.autoplay.stop();
+		}
 	}
 	const onMouseEnter = (e:React.MouseEvent) => {
+		setIsAnimating(true);
 		swiperRef.current && swiperRef.current.swiper.autoplay.run();
 	}
-	const onMouseLeave = () => {	
+	const onMouseLeave = () => {
+		setIsAnimating(false);	
 		swiperRef.current && swiperRef.current.swiper.autoplay.stop();
 	}
 	return (
@@ -37,10 +42,11 @@ const SliderBigItem = ({img,sizes,name,section,price,extraImg} : SliderBigItemPr
 					ref={swiperRef}
 					modules={[Navigation, Pagination, Scrollbar, A11y,Autoplay]}
 					slidesPerView={1}
-					autoplay={{delay:1200}}
+					autoplay={{delay:450}}
 					loop
 					effect='fade'
 					onInit={controlSwiperAutoplay}
+					onBeforeTransitionStart={controlSwiperAutoplay}
 				>
 					{
 						extraImg?.map((item) => {
