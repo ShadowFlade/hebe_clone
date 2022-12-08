@@ -48,7 +48,7 @@ const SliderBigItem = ({img,sizes,name,section,price,extraImg} : SliderBigItemPr
 	return (
 		<div className="slider-big-item">
 			<div className="slider-big-item__inner">
-				<div className="slider-big-item__photo" onMouseEnter={startAutoplay}>
+				<div className="slider-big-item__photo">
 						<Swiper>
 							{extraImg?.map(item=>{
 								return <SwiperSlide>
