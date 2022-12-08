@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import {Swiper,SwiperSlide} from 'swiper/react';
-import {Autoplay} from 'swiper';
+import React, { useRef, useState } from 'react';
+import {Swiper as SwiperEl,SwiperRef,SwiperSlide} from 'swiper/react';
+import {Swiper} from 'swiper/types';
+
+import {A11y, Autoplay, Navigation, Pagination, Scrollbar} from 'swiper';
 import 'swiper/css/autoplay';
 import './SliderBigItem.scss';
+import { nanoid } from 'nanoid';
 type  SliderBigItemProps = {
 	img:string;
 	extraImg?:string[];
@@ -13,70 +16,45 @@ type  SliderBigItemProps = {
 }
 
 const SliderBigItem = ({img,sizes,name,section,price,extraImg} : SliderBigItemProps) => {
-	const [currImg,setCurrImg] = useState(img);
-	const [currImgIndex,setCurrImgIndex] = useState(0);
+	const [isAnimating,setIsAnimating] = useState(false);
 	extraImg ?  extraImg.unshift(img) : null;
-	const handleAutoplay = (currImg:string) => {
-		const currentIndexOfActiveImage = extraImg?.findIndex((el)=>{
-			return el === currImg;
-		})
-		console.log((typeof currentIndexOfActiveImage === 'number' && !!extraImg) && 
-			currentIndexOfActiveImage < extraImg.length -1);
-
-		if((typeof currentIndexOfActiveImage === 'number' && !!extraImg) 
-			&& currentIndexOfActiveImage < extraImg.length -1 ){
-			let imgIndex = 0;
-			console.log(currentIndexOfActiveImage);
-			for(let i=currentIndexOfActiveImage; i++; i<999){
-				console.log(i);
-				if(extraImg && i >= extraImg.length-1){
-					imgIndex = imgIndex % extraImg.length-1;
-				}
-				imgIndex = i;
-				console.log(i);
-				!!extraImg ? setTimeout(()=>{setCurrImg(extraImg[imgIndex])},3000) : false;
-				  
-			}
-		} else {
-			return;
-		}
+	const swiperRef = useRef<SwiperRef | null>(null)
+	const controlSwiperAutoplay = (swiper:Swiper) => {
+		swiper.autoplay.pause();
 	}
-	const startAutoplay = () => {
-		handleAutoplay(currImg);
+	const onMouseEnter = (e:React.MouseEvent) => {
+		swiperRef.current && swiperRef.current.swiper.autoplay.run();
 	}
-
+	const onMouseLeave = () => {	
+		swiperRef.current && swiperRef.current.swiper.autoplay.stop();
+	}
 	return (
-		<div className="slider-big-item">
-			<div className="slider-big-item__inner">
-				<div className="slider-big-item__photo">
-						<Swiper>
-							{extraImg?.map(item=>{
-								return <SwiperSlide>
-									<img src={item} alt="" />
-								</SwiperSlide>
-							})}
-						</Swiper>
-				</div>
-				<div className="slider-big-item__info">
-					<div className="slider-big-item__name-section">
-						<p className="slider-big-item__name">{name}</p>
-						<p className="slider-big-item__section">{section}</p>
-					</div>
-					<p className="slider-big-item__price">{price}</p>
-					<p className="slider-big-item__sizes">
-						{sizes.map(size => {
+			<div className="swiper-photo"
+				onMouseOver={onMouseEnter} 
+				onMouseOut={onMouseLeave}
+			>
+				<SwiperEl
+					ref={swiperRef}
+					modules={[Navigation, Pagination, Scrollbar, A11y,Autoplay]}
+					slidesPerView={1}
+					autoplay={{delay:1200}}
+					loop
+					effect='fade'
+					onInit={controlSwiperAutoplay}
+				>
+					{
+						extraImg?.map((item) => {
 							return (
-								<p className='slider-big-item__size'>
-									<span>
-										{size}
-									</span>
-								</p>
+								<SwiperSlide key={nanoid()} style={{paddingInline:0}}>
+									<img src={item} alt="" style={{width:'100%'}}/>
+								</SwiperSlide>
 							)
-						})}
-					</p>
-				</div>
+						})
+					}
+				</SwiperEl>
 			</div>
-		</div>
+				
+	
 	)
 }
 
