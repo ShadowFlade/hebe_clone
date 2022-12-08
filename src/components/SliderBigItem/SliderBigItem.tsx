@@ -27,15 +27,15 @@ const SliderBigItem = ({img,sizes,name,section,price,extraImg} : SliderBigItemPr
 			&& currentIndexOfActiveImage < extraImg.length -1 ){
 			let imgIndex = 0;
 			console.log(currentIndexOfActiveImage);
-			for(let i=currentIndexOfActiveImage; i++; i<999){
+			for(let i=currentIndexOfActiveImage; i<999; i++){
 				console.log(i);
 				if(extraImg && i >= extraImg.length-1){
-					imgIndex = imgIndex % extraImg.length-1;
+					imgIndex = i % (extraImg.length-1);
 				}
 				imgIndex = i;
 				console.log(i);
-				!!extraImg ? setTimeout(()=>{setCurrImg(extraImg[imgIndex])},3000) : false;
-				  
+				!!extraImg ? setCurrImg(extraImg[imgIndex]) : false;
+				console.log(currImg);
 			}
 		} else {
 			return;
