@@ -134,7 +134,6 @@ const BigSlider = ({spaceBetween,slidesPerView}:SwiperOptions) => {
 						modules={[Navigation, A11y,Scrollbar]}
 						navigation
 						scrollbar={{draggable:true}}
-						createElements
 						watchSlidesProgress
 						speed={200}
 					>	
