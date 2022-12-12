@@ -71,8 +71,8 @@ const SliderBigItem = ({img,sizes,name,section,price,extraImg} : SliderBigItemPr
 		<div className="slider-big-item">
 			<div className="slider-big-item__inner">
 				<div className="slider-big-item__photo"
-					onMouseOver={onMouseEnter} 
-					onMouseOut={onMouseLeave}
+					// onMouseOver={onMouseEnter} 
+					// onMouseOut={onMouseLeave}
 				>
 					<SwiperEl
 						ref={swiperRef}
@@ -81,8 +81,8 @@ const SliderBigItem = ({img,sizes,name,section,price,extraImg} : SliderBigItemPr
 						autoplay={{delay:450}}
 						loop
 						effect='fade'
-						onInit={controlSwiperAutoplay}
-						onBeforeTransitionStart={controlSwiperAutoplay}
+						// onInit={controlSwiperAutoplay}
+						// onBeforeTransitionStart={controlSwiperAutoplay}
 					>
 						{
 							extraImg?.map((item) => {

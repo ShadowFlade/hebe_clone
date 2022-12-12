@@ -6,6 +6,7 @@ import App from './App';
 
 import './styles/index.scss';
 import './styles/nullstyle.css';
+import './utils/utils.scss';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Falied to find the root element');

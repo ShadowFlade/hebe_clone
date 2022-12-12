@@ -1,0 +1,30 @@
+.brands{
+	margin-inline:15vw;
+	&__inner{
+		display:flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap:wrap;
+	}
+	&__item{
+		width: 20%;
+		&--revealing{
+			animation:fadeIn .5s linear forwards;
+		}
+	}
+	&__img{
+		width: 100%;
+		aspect-ratio: 4/2;
+		object-fit: contain;
+		mix-blend-mode: color-burn;
+	}
+}
+
+@keyframes fadeIn {
+	from{
+		opacity:0;
+	}
+	to{
+		opacity:1;
+	}
+}
