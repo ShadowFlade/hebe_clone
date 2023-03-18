@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y, Navigation,Scrollbar, SwiperOptions  } from 'swiper';
+import { A11y, Navigation, Scrollbar, SwiperOptions } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
@@ -9,149 +9,152 @@ import SliderBigItem from '../SliderBigItem/SliderBigItem';
 import woman from './woman.jpg';
 import woman_1 from './woman.jpg';
 import woman_2 from './woman.jpg';
-
 import woman1 from './woman1.jpg';
-
 import woman2 from './woman2.jpg';
 import woman2_1 from './woman2_1.jpg';
 import woman2_3 from './woman2_3.jpg';
 import woman2_4 from './woman2_4.jpg';
 import woman2_5 from './woman2_5.jpg';
 import woman2_6 from './woman2_6.jpg';
-
 import woman3 from './woman3.jpg';
 import woman3_1 from './woman3_1.jpg';
-
-
-
 import woman4 from './woman4.jpg';
 import woman4_1 from './woman4_1.jpg';
-
 import woman5 from './woman5.jpg';
 import woman5_1 from './woman5_1.jpg';
 import woman5_2 from './woman5_2.jpg';
 import woman5_3 from './woman5_3.jpg';
 import woman5_4 from './woman5_4.jpg';
 import woman5_6 from './woman5_6.jpg';
-
-
 import woman6 from './woman6.jpg';
 import woman6_1 from './woman6_1.jpg';
 import woman6_2 from './woman6_2.jpg';
 import woman6_3 from './woman6_3.jpg';
-
-
 import woman7 from './woman7.jpg';
 import woman7_1 from './woman7_1.jpg';
 import woman7_2 from './woman7_2.jpg';
 import woman7_3 from './woman7_3.jpg';
 
-
 import './BigSlider.scss';
 
 const slides = [
 	{
-		img:woman,
-		extraImg:[woman_1,woman_2],
-		sizes:['S'],
-		name:'Cali Midi Dress',
-		section:'Cartel & Willow ',
-		price:'$169.00'
+		img: woman,
+		extraImg: [woman_1, woman_2],
+		sizes: ['S'],
+		name: 'Cali Midi Dress',
+		section: 'Cartel & Willow ',
+		price: '$169.00',
 	},
 	{
-		img:woman1,
-		extraImg:[],
-		sizes:['S','M'],
-		name:'Cali Midi Dress',
-		section:'Cartel & Willow ',
-		price:'$389.00'
+		img: woman1,
+		extraImg: [],
+		sizes: ['S', 'M'],
+		name: 'Cali Midi Dress',
+		section: 'Cartel & Willow ',
+		price: '$389.00',
 	},
 	{
-		img:woman2,
-		extraImg:[woman2_1,woman2_3,woman2_4,woman2_5,woman2_6],
-		sizes:['M','L'],
-		name:'Cali Midi Dress',
-		section:'Cartel & Willow ',
-		price:'$182.00'
+		img: woman2,
+		extraImg: [woman2_1, woman2_3, woman2_4, woman2_5, woman2_6],
+		sizes: ['M', 'L'],
+		name: 'Cali Midi Dress',
+		section: 'Cartel & Willow ',
+		price: '$182.00',
 	},
 	{
-		img:woman3,
-		extraImg:[woman3_1],
-		sizes:['XL'],
-		name:'Cali Midi Dress',
-		section:'Cartel & Willow ',
-		price:'$149.00'
+		img: woman3,
+		extraImg: [woman3_1],
+		sizes: ['XL'],
+		name: 'Cali Midi Dress',
+		section: 'Cartel & Willow ',
+		price: '$149.00',
 	},
 	{
-		img:woman4,
-		extraImg:[woman4_1],
-		sizes:['S','M'],
-		name:'Cali Midi Dress',
-		section:'Cartel & Willow ',
-		price:'$389.00'
+		img: woman4,
+		extraImg: [woman4_1],
+		sizes: ['S', 'M'],
+		name: 'Cali Midi Dress',
+		section: 'Cartel & Willow ',
+		price: '$389.00',
 	},
 	{
-		img:woman5,
-		extraImg:[woman5_1,woman5_2,woman5_3,woman5_4,woman5_6],
-		sizes:['M','L'],
-		name:'Cali Midi Dress',
-		section:'Cartel & Willow ',
-		price:'$182.00'
+		img: woman5,
+		extraImg: [woman5_1, woman5_2, woman5_3, woman5_4, woman5_6],
+		sizes: ['M', 'L'],
+		name: 'Cali Midi Dress',
+		section: 'Cartel & Willow ',
+		price: '$182.00',
 	},
 	{
-		img:woman6,
-		extraImg:[woman6_1,woman6_2,woman6_3],
-		sizes:['XL'],
-		name:'Cali Midi Dress',
-		section:'Cartel & Willow ',
-		price:'$149.00'
-	}
-]
+		img: woman6,
+		extraImg: [woman6_1, woman6_2, woman6_3],
+		sizes: ['XL'],
+		name: 'Cali Midi Dress',
+		section: 'Cartel & Willow ',
+		price: '$149.00',
+	},
+];
 
+const preloadImages = () => {
+	slides.forEach(({ img }) => {
+		const image = new Image();
+		image.src = img;
+	});
+};
 
-const BigSlider = ({spaceBetween,slidesPerView}:SwiperOptions) => {
-	const [isInFocus,setIsInFocus] = useState(false);
-	const onMouseEnter  = React.useCallback((e:React.MouseEvent) => {
-		setIsInFocus(true);
-	},[])
-	const onMouseLeave  = React.useCallback((e:React.MouseEvent) => {
-		setIsInFocus(false);
-	},[])
-	
+const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
+	preloadImages();
+
+	const isInFocusRef = React.useRef(false);
+	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
+		isInFocusRef.current = true;
+	}, []);
+	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
+		isInFocusRef.current = false;
+	}, []);
+
 	return (
-		<div className={`big-slider ${isInFocus ? 'big-slider--in-focus' : 'big-slider--out-of-focus'}`} 
-		onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter}>
+		<div
+			className={`big-slider ${
+				isInFocusRef.current ? 'big-slider--in-focus' : 'big-slider--out-of-focus'
+			}`}
+			onMouseLeave={onMouseLeave}
+			onMouseEnter={onMouseEnter}
+		>
 			<div className="big-slider__titles">
 				<h2 className="big-slider__title">Must Haves</h2>
 				<h3 className="big-slider__subtitle">Some of our favourite picks this week.</h3>
 			</div>
 
 			<div className="big-slider__inner">
-
-					<Swiper 
-						spaceBetween={spaceBetween} 
-						slidesPerView={slidesPerView}
-						modules={[Navigation, A11y,Scrollbar]}
-						navigation
-						scrollbar={{draggable:true}}
-						watchSlidesProgress
-						speed={200}
-					>	
-							{slides.map(({img,sizes,name,section,price,extraImg}) => {
-								return (
-									<SwiperSlide key={nanoid()}>
-											<SliderBigItem img={img} sizes={sizes} name={name} 
-											section={section} price={price} extraImg={extraImg} />
-									</SwiperSlide>
-								)
-							})}
-
-					</Swiper>
-
+				<Swiper
+					spaceBetween={spaceBetween}
+					slidesPerView={slidesPerView}
+					modules={[Navigation, A11y, Scrollbar]}
+					navigation
+					scrollbar={{ draggable: true }}
+					watchSlidesProgress
+					speed={200}
+				>
+					{slides.map(({ img, sizes, name, section, price, extraImg }) => {
+						return (
+							<SwiperSlide key={nanoid()}>
+								<SliderBigItem
+									img={img}
+									sizes={sizes}
+									name={name}
+									section={section}
+									price={price}
+									extraImg={extraImg}
+								/>
+							</SwiperSlide>
+						);
+					})}
+				</Swiper>
 			</div>
 		</div>
-
-	)
-}
+	);
+};
 
 export default BigSlider;
