@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y, Navigation, Scrollbar, SwiperOptions } from 'swiper';
+import { A11y, Navigation, Scrollbar, SwiperOptions, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
@@ -105,16 +105,28 @@ const preloadImages = () => {
 };
 
 const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
+	const SLIDE_DELAY = 1000;
+	console.log('render');
 	preloadImages();
 	const [isInFocus, setIsInFocus] = useState(false);
+	const [isOuterSliderMoving, seIsOuterSliderMoving] = useState(!isInFocus);
+	const [isInnerSliderMoving, setIsInnerSliderMoving] = useState(isInFocus);
+	const isOuterSliderMovingRef = useRef(!isInFocus);
+	// const setIsInnerSliderMoving = useRef(isInFocus);
+	const [isAutoplayEnabled, setIsAutoplayEnabled] = useState(!isInFocus && isOuterSliderMoving);
+
 	const isInFocusRef = React.useRef(false);
+
 	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
 		// isInFocusRef.current = true;
 		setIsInFocus(true);
+		seIsOuterSliderMoving(false);
+		console.log(isOuterSliderMoving);
 	}, []);
 	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
 		// isInFocusRef.current = false;
 		setIsInFocus(false);
+		seIsOuterSliderMoving(true);
 	}, []);
 
 	const slidesList = React.useMemo(() => {
@@ -135,7 +147,7 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 				</>
 			);
 		});
-	}, []);
+	}, [isOuterSliderMoving]);
 
 	return (
 		<div
@@ -154,11 +166,13 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 				<Swiper
 					spaceBetween={spaceBetween}
 					slidesPerView={slidesPerView}
-					modules={[Navigation, A11y, Scrollbar]}
+					modules={[Navigation, A11y, Scrollbar, Autoplay]}
 					navigation
 					scrollbar={{ draggable: true }}
 					watchSlidesProgress
-					speed={200}
+					speed={SLIDE_DELAY / 2}
+					effect="cards"
+					autoplay={isAutoplayEnabled ? { delay: SLIDE_DELAY } : false}
 				>
 					{/* {<SlidesList />} */}
 					{slidesList}
