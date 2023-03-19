@@ -36,6 +36,7 @@ import woman7_2 from './woman7_2.jpg';
 import woman7_3 from './woman7_3.jpg';
 
 import './BigSlider.scss';
+import SlidesList from '../SlidesList';
 
 const slides = [
 	{
@@ -105,19 +106,41 @@ const preloadImages = () => {
 
 const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 	preloadImages();
-
+	const [isInFocus, setIsInFocus] = useState(false);
 	const isInFocusRef = React.useRef(false);
 	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
-		isInFocusRef.current = true;
+		// isInFocusRef.current = true;
+		setIsInFocus(true);
 	}, []);
 	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
-		isInFocusRef.current = false;
+		// isInFocusRef.current = false;
+		setIsInFocus(false);
+	}, []);
+
+	const slidesList = React.useMemo(() => {
+		return slides.map(({ img, sizes, name, section, price, extraImg }) => {
+			return (
+				<>
+					<SwiperSlide key={nanoid()}>
+						<SliderBigItem
+							img={img}
+							sizes={sizes}
+							name={name}
+							section={section}
+							price={price}
+							extraImg={extraImg}
+							key={nanoid()}
+						/>
+					</SwiperSlide>
+				</>
+			);
+		});
 	}, []);
 
 	return (
 		<div
 			className={`big-slider ${
-				isInFocusRef.current ? 'big-slider--in-focus' : 'big-slider--out-of-focus'
+				isInFocus ? 'big-slider--in-focus' : 'big-slider--out-of-focus'
 			}`}
 			onMouseLeave={onMouseLeave}
 			onMouseEnter={onMouseEnter}
@@ -137,24 +160,12 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 					watchSlidesProgress
 					speed={200}
 				>
-					{slides.map(({ img, sizes, name, section, price, extraImg }) => {
-						return (
-							<SwiperSlide key={nanoid()}>
-								<SliderBigItem
-									img={img}
-									sizes={sizes}
-									name={name}
-									section={section}
-									price={price}
-									extraImg={extraImg}
-								/>
-							</SwiperSlide>
-						);
-					})}
+					{/* {<SlidesList />} */}
+					{slidesList}
 				</Swiper>
 			</div>
 		</div>
 	);
 };
-
+export { slides };
 export default BigSlider;
