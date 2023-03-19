@@ -120,13 +120,13 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
 		// isInFocusRef.current = true;
 		setIsInFocus(true);
-		seIsOuterSliderMoving(false);
-		console.log(isOuterSliderMoving);
+		// seIsOuterSliderMoving(false);
+		// console.log(isOuterSliderMoving);
 	}, []);
 	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
 		// isInFocusRef.current = false;
 		setIsInFocus(false);
-		seIsOuterSliderMoving(true);
+		// seIsOuterSliderMoving(true);
 	}, []);
 
 	const slidesList = React.useMemo(() => {
@@ -172,7 +172,7 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 					watchSlidesProgress
 					speed={SLIDE_DELAY / 2}
 					effect="cards"
-					autoplay={isAutoplayEnabled ? { delay: SLIDE_DELAY } : false}
+					// autoplay={isAutoplayEnabled ? { delay: SLIDE_DELAY } : false}
 				>
 					{/* {<SlidesList />} */}
 					{slidesList}
