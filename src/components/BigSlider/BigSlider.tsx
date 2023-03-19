@@ -1,6 +1,6 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { A11y, Navigation, Scrollbar, SwiperOptions, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -37,6 +37,7 @@ import woman7_3 from './woman7_3.jpg';
 
 import './BigSlider.scss';
 import SlidesList from '../SlidesList';
+import { SwiperModule } from 'swiper/types';
 
 const slides = [
 	{
@@ -97,38 +98,58 @@ const slides = [
 	},
 ];
 
-const preloadImages = () => {
+const preloadImages2 = (callback: () => void) => {
+	let loaded = 0;
+	const total = slides.length;
+
 	slides.forEach(({ img }) => {
 		const image = new Image();
+		image.onload = () => {
+			loaded++;
+			if (loaded === total) {
+				callback();
+			}
+		};
 		image.src = img;
 	});
 };
 
 const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
+	let swiper: any;
+	const preloadImages = React.useCallback(() => {
+		slides.forEach(({ img }) => {
+			const image = new Image();
+
+			image.src = img;
+		});
+	}, []);
 	const SLIDE_DELAY = 1000;
 	console.log('render');
-	preloadImages();
-	const [isInFocus, setIsInFocus] = useState(false);
-	const [isOuterSliderMoving, seIsOuterSliderMoving] = useState(!isInFocus);
-	const [isInnerSliderMoving, setIsInnerSliderMoving] = useState(isInFocus);
-	const isOuterSliderMovingRef = useRef(!isInFocus);
-	// const setIsInnerSliderMoving = useRef(isInFocus);
-	const [isAutoplayEnabled, setIsAutoplayEnabled] = useState(!isInFocus && isOuterSliderMoving);
 
-	const isInFocusRef = React.useRef(false);
+	preloadImages();
+
+	const [isInFocus, setIsInFocus] = useState(false);
+	const [isOuterSliderMoving, setIsOuterSliderMoving] = useState(!isInFocus);
+	const [isInnerSliderMoving, setIsInnerSliderMoving] = useState(isInFocus);
 
 	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
-		// isInFocusRef.current = true;
 		setIsInFocus(true);
-		// seIsOuterSliderMoving(false);
-		// console.log(isOuterSliderMoving);
-	}, []);
-	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
-		// isInFocusRef.current = false;
-		setIsInFocus(false);
-		// seIsOuterSliderMoving(true);
+		setIsOuterSliderMoving(false);
+		swiper.swiper.autoplay.pause();
 	}, []);
 
+	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
+		setIsInFocus(false);
+		setIsOuterSliderMoving(true);
+		swiper.swiper.autoplay.run();
+	}, []);
+
+	useEffect(() => {
+		preloadImages2(() => {
+			setIsOuterSliderMoving(true);
+			swiper = swiperRef.current as unknown as SwiperRef;
+		});
+	}, []);
 	const slidesList = React.useMemo(() => {
 		return slides.map(({ img, sizes, name, section, price, extraImg }) => {
 			return (
@@ -147,7 +168,8 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 				</>
 			);
 		});
-	}, [isOuterSliderMoving]);
+	}, []);
+	const swiperRef = useRef(null);
 
 	return (
 		<div
@@ -164,6 +186,7 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 
 			<div className="big-slider__inner">
 				<Swiper
+					ref={swiperRef}
 					spaceBetween={spaceBetween}
 					slidesPerView={slidesPerView}
 					modules={[Navigation, A11y, Scrollbar, Autoplay]}
@@ -172,7 +195,9 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 					watchSlidesProgress
 					speed={SLIDE_DELAY / 2}
 					effect="cards"
-					// autoplay={isAutoplayEnabled ? { delay: SLIDE_DELAY } : false}
+					autoplay={{
+						delay: SLIDE_DELAY,
+					}}
 				>
 					{/* {<SlidesList />} */}
 					{slidesList}
