@@ -1,22 +1,23 @@
-.header-menu-dropdown{
+.header-menu-dropdown {
 	width: 100%;
 	background-color: var(--colorNav);
-	position: fixed;
-	bottom:top;
-	font-size:.7em;
-	color:inherit;
-	left:0;
+	position: absolute;
+	bottom: top;
+	font-size: 0.7em;
+	color: inherit;
+	left: 0;
 	width: 100vw;
-	padding:1.5rem 3rem 2rem .5rem;
-	&__inner{
+	padding: 1.5rem 3rem 2rem 0.5rem;
+
+	&__inner {
 		display: flex;
 		justify-content: space-between;
 	}
-	&__title{
+	&__title {
 		text-transform: uppercase;
+		text-align: left;
 	}
-	&__items{
-		margin-top:1.5rem;
+	&__items {
+		margin-top: 1.5rem;
 	}
-	
 }

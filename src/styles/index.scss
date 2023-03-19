@@ -12,7 +12,13 @@ body{
 
 @font-face {
 	font-family: "Noto Serif Oriya";
-	src: url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Regular.ttf') format('ttf');
+	src: 
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Regular/NotoSerifOriya-Regular.ttf') format('ttf'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Regular/NotoSerifOriya-Regular.woff') format('woff'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Regular/NotoSerifOriya-Regular.woff2') format('woff2'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Regular/NotoSerifOriya-Regular.woff2') format('eot'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Regular/NotoSerifOriya-Regular.woff2') format('otf');
+
 	font-weight:400;
 	font-style:normal;
 	font-display:swap;
@@ -20,7 +26,17 @@ body{
 
 @font-face {
 	font-family: "Noto Serif Oriya";
-	src: url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Medium.ttf') format('ttf');
+	src: 
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Medium/NotoSerifOriya-Medium.ttf') 
+	format('ttf'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Medium/NotoSerifOriya-Medium.woff') 
+	format('woff'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Medium/NotoSerifOriya-Medium.eot') 
+	format('eot'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Medium/NotoSerifOriya-Medium.otf')
+	 format('otf'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Medium/NotoSerifOriya-Medium.woff2')
+	 format('woff2');
 	font-weight:500;
 	font-style:normal;
 	font-display:swap;
@@ -28,7 +44,17 @@ body{
 
 @font-face {
 	font-family: "Noto Serif Oriya";
-	src: url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-SemiBold.ttf') format('ttf');
+	src: 
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-SemiBold/NotoSerifOriya-SemiBold.ttf') 
+	format('ttf'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-SemiBold/NotoSerifOriya-SemiBold.woff') 
+	format('woff'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-SemiBold/NotoSerifOriya-SemiBold.eot') 
+	format('eot'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-SemiBold/NotoSerifOriya-SemiBold.otf')
+	 format('otf'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-SemiBold/NotoSerifOriya-SemiBold.woff2')
+	 format('woff2');	
 	font-weight:600;
 	font-style:normal;
 	font-display:swap;
@@ -36,7 +62,17 @@ body{
 
 @font-face {
 	font-family: "Noto Serif Oriya";
-	src: url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Bold.ttf') format('ttf');
+	src: 
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Bold/NotoSerifOriya-Bold.ttf') 
+	format('ttf'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Bold/NotoSerifOriya-Bold.woff') 
+	format('woff'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Bold/NotoSerifOriya-Bold.eot') 
+	format('eot'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Bold/NotoSerifOriya-Bold.otf')
+	 format('otf'),
+	url('../fonts/Noto_Serif_Oriya/static/NotoSerifOriya-Bold/NotoSerifOriya-Bold.woff2')
+	 format('woff2');	
 	font-weight:700;
 	font-style:normal;
 	font-display:swap;

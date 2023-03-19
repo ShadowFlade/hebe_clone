@@ -1,0 +1,43 @@
+$sizeLength:10px;
+.slider-big-item{
+
+	&__info{
+		margin-top:2rem;
+		color:white;
+		text-align: center;
+		font-size:1.5rem;
+	}
+
+	&__img{
+		min-height:58.125rem;
+		height:38.125rem;
+
+	}
+	&__name{
+		font-size:1em;
+	}
+	&__price{
+		margin-top:1rem;
+		font-size:.8em;
+	}
+	&__section{
+		margin-top:.5rem;
+		font-size:.8em;
+	}
+	&__sizes{
+		display: flex;
+		justify-content: center;
+		margin-top: .5rem;
+		padding: .5rem 0;
+	}
+	&__size{
+		display:flex;
+		border:1px solid white;
+		font-size:1em;
+		padding:.75rem;
+		align-items: center;
+		justify-content: center;
+		margin-inline: .5rem;
+	}
+}
+

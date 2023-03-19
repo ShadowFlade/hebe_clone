@@ -7,6 +7,11 @@ declare module "*.jpg" {
 	export default content;
 }
 
+declare module "*.png" {
+	const content: any;
+	export default content;
+}
+
 type Link = {
 	text:string;
 	link?:string;

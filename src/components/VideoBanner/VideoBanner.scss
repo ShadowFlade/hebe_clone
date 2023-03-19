@@ -1,0 +1,20 @@
+.video-banner{
+	&__video{
+		height:20vw;
+		animation: animation .15s linear;
+	}
+	&__inner{
+		display:flex;
+		justify-content: center;
+		padding:4rem 0;
+	}
+}
+
+@keyframes animation {
+	from{
+		opacity:0;
+	}
+	to{
+		opacity:1;
+	}
+}

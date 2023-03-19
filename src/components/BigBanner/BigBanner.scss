@@ -1,0 +1,24 @@
+:root{
+	--delay:.3s;
+}
+.big-banner{
+	padding:6rem 8rem;
+	&__inner{
+
+	}
+	&__text{
+		font-family: Montserrat, sans-serif;
+		font-size:1.34375rem;
+		text-align: center;
+		line-height:3;
+		padding:1.5rem 26rem;
+		opacity:0;
+		color:rgb(51, 48, 41);
+		&--revealing{
+			animation:reveal .9s forwards var(--delay);
+		}
+	}
+
+	
+}
+
