@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper as SwiperEl, SwiperRef, SwiperSlide } from 'swiper/react';
-import { Swiper } from 'swiper/types';
+import { AutoplayOptions, Swiper } from 'swiper/types';
 
 import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
 import 'swiper/css/autoplay';
@@ -17,12 +17,20 @@ type SliderBigItemProps = {
 };
 
 const SliderBigItem = ({ img, sizes, name, section, price, extraImg }: SliderBigItemProps) => {
+	const [autoplayDelay, setAutoplayDelay] = useState(500); // initial value of 500ms
+
 	const SECONDS_TO_WAINT_UNTILL_SLIDER_ACTIVE = 1.5;
 	const MILISECONDS_TO_CHECK_THE_STATE = 1000;
 	const [isAnimating, setIsAnimating] = useState(false);
 	const [isHoverTimeExceeded, setIsHoverTimeExceeded] = useState(false);
 	extraImg ? extraImg.unshift(img) : null;
 	const swiperRef = useRef<SwiperRef | null>(null);
+	const handleAutoplayDelayChange = (delay: number) => {
+		setAutoplayDelay(delay);
+		const options = swiperRef.current?.swiper?.params?.autoplay as AutoplayOptions;
+		options.delay = delay;
+		swiperRef.current?.swiper.update(); // update the Swiper instance to apply the new autoplay delay
+	  };
 	async function delay(ms: number) {
 		// return await for better async stack trace support in case of errors.
 		return await new Promise((resolve) => setTimeout(resolve, ms));
@@ -56,32 +64,33 @@ const SliderBigItem = ({ img, sizes, name, section, price, extraImg }: SliderBig
 		}
 	};
 	const onMouseEnter = (e: React.MouseEvent) => {
-		if (isTimeLimitExceeded(SECONDS_TO_WAINT_UNTILL_SLIDER_ACTIVE)) {
+		handleAutoplayDelayChange(500);
+		// if (isTimeLimitExceeded(SECONDS_TO_WAINT_UNTILL_SLIDER_ACTIVE)) {
 			setIsAnimating(true);
 			swiperRef.current && swiperRef.current.swiper.autoplay.run();
-		}
+		// }
 	};
 	const onMouseLeave = () => {
-		setIsAnimating(false);
-		swiperRef.current && swiperRef.current.swiper.autoplay.stop();
+		// setIsAnimating(false);
+		swiperRef.current && swiperRef.current.swiper.autoplay.pause();
 	};
+
 	return (
 		<div className="slider-big-item">
 			<div className="slider-big-item__inner">
 				<div
 					className="slider-big-item__photo"
-					// onMouseOver={onMouseEnter}
-					// onMouseOut={onMouseLeave}
+					onMouseOver={onMouseEnter}
+					onMouseOut={onMouseLeave}
 				>
 					<SwiperEl
 						ref={swiperRef}
 						modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
 						slidesPerView={1}
-						autoplay={false}
 						loop
 						effect="fade"
-						// onInit={controlSwiperAutoplay}
-						// onBeforeTransitionStart={controlSwiperAutoplay}
+						autoplay={undefined}
+						onInit={()=>{swiperRef.current?.swiper.autoplay.pause()}}
 					>
 						{extraImg?.map((item) => {
 							return (

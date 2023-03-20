@@ -98,22 +98,6 @@ const slides = [
 	},
 ];
 
-const preloadImages2 = (callback: () => void) => {
-	let loaded = 0;
-	const total = slides.length;
-
-	slides.forEach(({ img }) => {
-		const image = new Image();
-		image.onload = () => {
-			loaded++;
-			if (loaded === total) {
-				callback();
-			}
-		};
-		image.src = img;
-	});
-};
-
 const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 	let swiper: any;
 	const preloadImages = React.useCallback(() => {
@@ -124,31 +108,24 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 		});
 	}, []);
 	const SLIDE_DELAY = 1000;
-	console.log('render');
 
 	preloadImages();
 
 	const [isInFocus, setIsInFocus] = useState(false);
-	const [isOuterSliderMoving, setIsOuterSliderMoving] = useState(!isInFocus);
-	const [isInnerSliderMoving, setIsInnerSliderMoving] = useState(isInFocus);
+
 
 	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
 		setIsInFocus(true);
-		setIsOuterSliderMoving(false);
 		swiper.swiper.autoplay.pause();
 	}, []);
 
 	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
 		setIsInFocus(false);
-		setIsOuterSliderMoving(true);
 		swiper.swiper.autoplay.run();
 	}, []);
 
 	useEffect(() => {
-		preloadImages2(() => {
-			setIsOuterSliderMoving(true);
-			swiper = swiperRef.current as unknown as SwiperRef;
-		});
+		swiper = swiperRef.current as unknown as SwiperRef;
 	}, []);
 	const slidesList = React.useMemo(() => {
 		return slides.map(({ img, sizes, name, section, price, extraImg }) => {
@@ -163,6 +140,7 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 							price={price}
 							extraImg={extraImg}
 							key={nanoid()}
+							
 						/>
 					</SwiperSlide>
 				</>
