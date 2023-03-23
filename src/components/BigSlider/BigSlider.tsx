@@ -36,8 +36,7 @@ import woman7_2 from './woman7_2.jpg';
 import woman7_3 from './woman7_3.jpg';
 
 import './BigSlider.scss';
-import SlidesList from '../SlidesList';
-import { SwiperModule } from 'swiper/types';
+
 
 const slides = [
 	{
@@ -99,11 +98,11 @@ const slides = [
 ];
 
 const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
-	let swiper: any;
+	const [isInFocus, setIsInFocus] = useState(false);
+	const swiperRef = useRef(null);
 	const preloadImages = React.useCallback(() => {
 		slides.forEach(({ img }) => {
 			const image = new Image();
-
 			image.src = img;
 		});
 	}, []);
@@ -111,22 +110,18 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 
 	preloadImages();
 
-	const [isInFocus, setIsInFocus] = useState(false);
-
-
 	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
+		const swiperEl = swiperRef.current as unknown as SwiperRef; 
 		setIsInFocus(true);
-		swiper.swiper.autoplay.pause();
+		swiperEl.swiper.autoplay.pause();
 	}, []);
 
 	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
 		setIsInFocus(false);
-		swiper.swiper.autoplay.run();
+		const swiperEl = swiperRef.current as unknown as SwiperRef; 
+		swiperEl.swiper.autoplay.run();
 	}, []);
 
-	useEffect(() => {
-		swiper = swiperRef.current as unknown as SwiperRef;
-	}, []);
 	const slidesList = React.useMemo(() => {
 		return slides.map(({ img, sizes, name, section, price, extraImg }) => {
 			return (
@@ -140,14 +135,12 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 							price={price}
 							extraImg={extraImg}
 							key={nanoid()}
-							
 						/>
 					</SwiperSlide>
 				</>
 			);
 		});
 	}, []);
-	const swiperRef = useRef(null);
 
 	return (
 		<div
@@ -177,7 +170,6 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 						delay: SLIDE_DELAY,
 					}}
 				>
-					{/* {<SlidesList />} */}
 					{slidesList}
 				</Swiper>
 			</div>
