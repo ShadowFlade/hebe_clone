@@ -153,5 +153,5 @@ const BigSlider = ({spaceBetween,slidesPerView}:SwiperOptions) => {
 
 	)
 }
-
+export {slides};
 export default BigSlider;
