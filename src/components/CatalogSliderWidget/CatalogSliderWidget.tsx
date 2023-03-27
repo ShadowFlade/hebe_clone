@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import {Swiper as SwiperType} from "swiper/types";
 import { slides } from '../BigSlider/BigSlider';
 import  "./CatalogSliderWidget.scss";
 
@@ -27,9 +28,9 @@ const CatalogSliderWidget = () => {
 		"--swiper-navigation-color": "#fff",
 		"--swiper-pagination-color": "#fff",
 	}
-	const swipeSideSlider = () => {
+	const swipeSideSlider = (mainSlider:SwiperType) => {
 		const sideSwiper = sideSlider.current as unknown as SwiperRef;
-		sideSwiper.swiper.slideNext(300);
+		sideSwiper.swiper.slideTo(mainSlider.activeIndex);
 	}
 	return (
 		<div className="catalog-widget">
@@ -51,7 +52,7 @@ const CatalogSliderWidget = () => {
 				<div className="catalog-widget__slider">
 					<Swiper
 						// onSlideChange={swipeSideSlider}
-						onSlideChange={(item)=>console.log(item.activeIndex)}
+						onSlideChange={swipeSideSlider}
 						spaceBetween={10}
 						slidesPerView={4}
 						freeMode={true}
