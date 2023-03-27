@@ -4,13 +4,13 @@ import BigPictureMainPage from '@/components/BigPictureMainPage/BigPictureMainPa
 import BigSlider from '@/components/BigSlider/BigSlider';
 import { nanoid } from 'nanoid';
 import Brands from '@/components/Brands/Brands';
+import CatalogSliderWidget from '@/components/CatalogSliderWidget/CatalogSliderWidget';
 
 type MainPage = {
 
 };
 const text = 'Curators of ethical fashion and New Zealand designed. Hebe is a destination concept store and online haven for style-seekers. A fashion selection lovingly handpicked for you, sealed with personal touch. Open six days.';
 const MainPage = ({}:MainPage) => {
-
 	return (
 		<Fragment>		
 			<div className="main-page__big-picture">
@@ -24,6 +24,9 @@ const MainPage = ({}:MainPage) => {
 			</div>
 			<div className="main-page__brands">
 				<Brands/>
+			</div>
+			<div className="main-page__catalog-widget">
+				<CatalogSliderWidget/>
 			</div>
 		</Fragment>
 	)

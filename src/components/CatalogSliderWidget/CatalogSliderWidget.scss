@@ -1,0 +1,14 @@
+.catalog-widget{
+	padding:2rem 4rem;
+	&__inner{
+		display:flex;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+	&__side-slider{
+		width: 20%;
+	}
+	&__slider{
+		width: 80%;
+	}
+}
