@@ -3,11 +3,12 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { FreeMode, Navigation, Thumbs, Pagination } from "swiper";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import {Swiper as SwiperType} from "swiper/types";
 import { slides } from '../BigSlider/BigSlider';
 import  "./CatalogSliderWidget.scss";
+import { nanoid } from 'nanoid';
 
 const CatalogSliderWidget = () => {
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -16,7 +17,7 @@ const CatalogSliderWidget = () => {
 	const slidesList = React.useMemo(() => {
 		return slides.map((slide) => {
 			return (
-				<SwiperSlide>
+				<SwiperSlide key={nanoid()}>
 					<img src={slide.img} />
 				</SwiperSlide>
 			)
@@ -37,13 +38,14 @@ const CatalogSliderWidget = () => {
 			<div className="catalog-widget__inner">
 				<div className="catalog-widget__side-slider">
 					<Swiper
+						slidesPerView={1} 
 						style={style}
 						spaceBetween={10}
 						navigation={true}
 						thumbs={{ swiper: thumbsSwiper }}
 						modules={[FreeMode, Navigation, Thumbs]}
 						className="mySwiper2"
-						direction='vertical'
+						direction={'vertical'}
 						ref={sideSlider}
 					>
 						{slidesList}
@@ -51,7 +53,6 @@ const CatalogSliderWidget = () => {
 				</div>
 				<div className="catalog-widget__slider">
 					<Swiper
-						// onSlideChange={swipeSideSlider}
 						onSlideChange={swipeSideSlider}
 						spaceBetween={10}
 						slidesPerView={4}

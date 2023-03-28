@@ -1,14 +1,30 @@
+.swiper{
+	width: 100%;
+}
 .catalog-widget{
 	padding:2rem 4rem;
+	height: 1700px;
 	&__inner{
 		display:flex;
 		justify-content: space-between;
 		align-items: flex-start;
 	}
 	&__side-slider{
-		width: 20%;
+		width: 40%;
 	}
 	&__slider{
 		width: 80%;
 	}
+}
+.swiper-vertical > .swiper-wrapper{
+	height:1700px;
+}
+.swiper-vertical .swiper-slide{
+	width: 100%;
+}
+.swiper-vertical .swiper-slide{
+	flex-shrink: 1;
+}
+.swiper-vertical .swiper-slide img{
+	width: 100%;
 }
