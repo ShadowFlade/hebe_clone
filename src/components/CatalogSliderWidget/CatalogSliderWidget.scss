@@ -12,13 +12,15 @@
 	&__slider {
 		width: 80%;
 	}
+	&__side-slide--active {
+		border: 2px solid yellow;
+	}
 }
-
-.catalog-widget__side-slider .swiper-slide {
+.catalog-widget__side-slide {
 	width: 8vw;
-	margin-top: 1rem;
+	margin-top: 2rem;
 }
-.catalog-widget__side-slider .swiper-slide {
+.catalog-widget__side-slide:first-child {
 	margin-top: 0;
 }
 .swiper-vertical > .swiper-wrapper {
@@ -33,7 +35,7 @@
 .swiper-vertical .swiper-slide img {
 	height: 100%;
 }
-.catalog-widget__side-slider .swiper-slide img {
+.catalog-widget__side-slide img {
 	width: 100%;
 }
 .swiper-slide {
