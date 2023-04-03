@@ -38,8 +38,8 @@ const CatalogSliderWidget = () => {
 	const swipeSideSlider = (mainSlider: SwiperType) => {
 		const sliderRef = sideSlider.current as unknown as SwiperRef;
 		const sideSliderReal = sliderRef.swiper as unknown as SwiperType;
-		console.log(sideSliderReal, ' sideSlider');
 		sideSliderReal.slideNext(mainSlider.activeIndex);
+		console.log(sideSliderReal.activeIndex);
 	};
 	useEffect(() => {
 		console.log(sideSlider, ' thumb');
@@ -50,7 +50,7 @@ const CatalogSliderWidget = () => {
 			<div className="catalog-widget__inner">
 				<div className="catalog-widget__side-slider">
 					<Swiper
-						slidesPerView={slides.length}
+						// slidesPerView={slides.length}
 						style={style}
 						slideActiveClass={'catalog-widget__side-slide--active'}
 						spaceBetween={10}
@@ -74,15 +74,15 @@ const CatalogSliderWidget = () => {
 						slidesPerView={4}
 						freeMode={true}
 						watchSlidesProgress={true}
-						modules={[FreeMode, Navigation, Thumbs, Scrollbar]}
+						modules={[FreeMode, Navigation, Thumbs, Scrollbar, Mousewheel]}
 						thumbs={{ swiper: sideSlider.current }}
 						className="mySwiper"
 						ref={mainSlider}
 						direction="vertical"
-						scrollbar={{
-							draggable: false,
-							enabled: true,
-							hide: true,
+						mousewheel={{
+							invert: false,
+							sensitivity: 1,
+							// eventsTarget: '.mySwiper-wrapper',
 						}}
 					>
 						{slidesList}
