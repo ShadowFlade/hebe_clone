@@ -37,7 +37,14 @@ import woman7_3 from './woman7_3.jpg';
 
 import './BigSlider.scss';
 
-
+export type slide = {
+	img: string;
+	extraImg: string[];
+	sizes: string[];
+	name: string;
+	section: string;
+	price: string;
+};
 const slides = [
 	{
 		img: woman,
@@ -111,14 +118,14 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 	preloadImages();
 
 	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
-		const swiperEl = swiperRef.current as unknown as SwiperRef; 
+		const swiperEl = swiperRef.current as unknown as SwiperRef;
 		setIsInFocus(true);
 		swiperEl.swiper.autoplay.pause();
 	}, []);
 
 	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
 		setIsInFocus(false);
-		const swiperEl = swiperRef.current as unknown as SwiperRef; 
+		const swiperEl = swiperRef.current as unknown as SwiperRef;
 		swiperEl.swiper.autoplay.run();
 	}, []);
 

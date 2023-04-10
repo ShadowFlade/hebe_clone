@@ -19,7 +19,18 @@ const CatalogSliderWidget = () => {
 	const sidePhotosRef = useRef<typeof slides>([]);
 	const mainSlider = useRef(null);
 	const sideSlider = useRef(null);
-	const [activeIndex, setActiveIndex] = useState(0);
+	const activeIndex = useRef(0);
+	const sideSlidesList = React.useMemo(() => {
+		return slides.map((slide) => {
+			sidePhotosRef.current.push(slide);
+			return (
+				<SwiperSlide key={nanoid()}>
+					<img src={slide.img} />
+				</SwiperSlide>
+			);
+		});
+	}, []);
+
 	const slidesList = React.useMemo(() => {
 		return slides.map((slide) => {
 			sidePhotosRef.current.push(slide);
@@ -38,8 +49,13 @@ const CatalogSliderWidget = () => {
 	const swipeSideSlider = (mainSlider: SwiperType) => {
 		const sliderRef = sideSlider.current as unknown as SwiperRef;
 		const sideSliderReal = sliderRef.swiper as unknown as SwiperType;
-		sideSliderReal.slideNext(mainSlider.activeIndex);
-		console.log(sideSliderReal.activeIndex);
+		activeIndex.current = mainSlider.activeIndex;
+		sideSliderReal.slideTo(mainSlider.activeIndex);
+		// sideSliderReal.updateProgress();
+		sideSliderReal.updateSlidesClasses();
+		// sideSliderReal.update();
+		console.log(sideSliderReal.activeIndex, 'active index func');
+		// sideSliderReal.enable();
 	};
 	useEffect(() => {
 		console.log(sideSlider, ' thumb');
@@ -51,6 +67,12 @@ const CatalogSliderWidget = () => {
 				<div className="catalog-widget__side-slider">
 					<Swiper
 						// slidesPerView={slides.length}
+						// onInit={(sideSlider) => sideSlider.disable()}
+						onBeforeTransitionStart={(slider) => {
+							console.log(slider.activeIndex, ' side active index');
+							slider.disable();
+							slider.updateSlidesClasses();
+						}}
 						style={style}
 						slideActiveClass={'catalog-widget__side-slide--active'}
 						spaceBetween={10}
@@ -64,7 +86,7 @@ const CatalogSliderWidget = () => {
 						ref={sideSlider}
 						direction="vertical"
 					>
-						{slidesList}
+						{sideSlidesList}
 					</Swiper>
 				</div>
 				<div className="catalog-widget__slider">
