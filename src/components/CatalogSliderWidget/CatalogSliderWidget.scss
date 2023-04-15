@@ -23,9 +23,12 @@
 		border: 2px solid yellow;
 	}
 }
-.catalog-widget__side-slide {
+.catalog-widget__side-slider .swiper-slide {
 	width: 8vw;
 	margin-top: 2rem;
+}
+.catalog-widget__side--active {
+	border: 2px solid yellow;
 }
 .catalog-widget__side-slide:first-child {
 	margin-top: 0;

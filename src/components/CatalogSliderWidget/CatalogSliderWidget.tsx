@@ -14,100 +14,85 @@ import './CatalogSliderWidget.scss';
 const CatalogSliderWidget = () => {
 	const renderCount = useRef(0);
 	renderCount.current += 1;
+
 	console.log(renderCount.current, ' renderCount');
-	const [thumbsSwiper, setThumbsSwiper] = useState<null | SwiperType | undefined>(null);
-	const sidePhotosRef = useRef<typeof slides>([]);
-	const mainSlider = useRef(null);
 	const sideSlider = useRef(null);
+	const mainSlider = useRef<SwiperRef | null>(null);
+
+	const [thumbsSwiper, setThumbsSwiper] = useState<null | SwiperType | undefined>(
+		sideSlider.current
+	);
+	const sidePhotosRef = useRef<typeof slides>([]);
 	const activeIndex = useRef(0);
-	const sideSlidesList = React.useMemo(() => {
-		return slides.map((slide) => {
-			sidePhotosRef.current.push(slide);
-			return (
-				<SwiperSlide key={nanoid()}>
-					<img src={slide.img} />
-				</SwiperSlide>
-			);
-		});
-	}, []);
-
-	const slidesList = React.useMemo(() => {
-		return slides.map((slide) => {
-			sidePhotosRef.current.push(slide);
-			return (
-				<SwiperSlide key={nanoid()}>
-					<img src={slide.img} />
-				</SwiperSlide>
-			);
-		});
-	}, []);
-
+	const sideSlidesList = slides.map((slide) => {
+		sidePhotosRef.current.push(slide);
+		return (
+			<SwiperSlide key={nanoid()}>
+				<img src={slide.img} />
+			</SwiperSlide>
+		);
+	});
+	const slidesList = slides.map((slide) => {
+		sidePhotosRef.current.push(slide);
+		return (
+			<SwiperSlide key={nanoid()}>
+				<img src={slide.img} />
+			</SwiperSlide>
+		);
+	});
 	const style: { [el: string]: string } = {
 		'--swiper-navigation-color': '#fff',
 		'--swiper-pagination-color': '#fff',
 	};
-	const swipeSideSlider = (mainSlider: SwiperType) => {
-		const sliderRef = sideSlider.current as unknown as SwiperRef;
-		const sideSliderReal = sliderRef.swiper as unknown as SwiperType;
-		activeIndex.current = mainSlider.activeIndex;
-		sideSliderReal.slideTo(mainSlider.activeIndex);
-		// sideSliderReal.updateProgress();
-		sideSliderReal.updateSlidesClasses();
-		// sideSliderReal.update();
-		console.log(sideSliderReal.activeIndex, 'active index func');
-		// sideSliderReal.enable();
-	};
+
 	useEffect(() => {
-		console.log(sideSlider, ' thumb');
+		console.log(sideSlider.current, ' thumb');
+		console.log(mainSlider.current, ' main slider');
 	});
 
 	return (
 		<div key={nanoid()} className="catalog-widget">
 			<div className="catalog-widget__inner">
+				<div className="catalog-widget__slider">
+					<Swiper
+						spaceBetween={10}
+						slidesPerView={1}
+						className="mySwiper"
+						watchSlidesProgress={true}
+						modules={[FreeMode, Navigation, Thumbs, Scrollbar, Mousewheel]}
+						onChange={() => {
+							console.log(mainSlider.current);
+							mainSlider.current?.swiper.update();
+						}}
+						onSwiper={() => {
+							mainSlider.current?.swiper.update();
+						}}
+						thumbs={{
+							swiper: sideSlider.current,
+							// also tried `swiper:sideSlider.current`
+							thumbsContainerClass: 'catalog_widget__side',
+							slideThumbActiveClass: 'catalog-widget__side--active',
+						}}
+						direction="vertical"
+						ref={mainSlider}
+					>
+						{slidesList}
+					</Swiper>
+				</div>
 				<div className="catalog-widget__side-slider">
 					<Swiper
-						// slidesPerView={slides.length}
-						// onInit={(sideSlider) => sideSlider.disable()}
-						onBeforeTransitionStart={(slider) => {
-							console.log(slider.activeIndex, ' side active index');
-							slider.disable();
-							slider.updateSlidesClasses();
-						}}
 						style={style}
 						slideActiveClass={'catalog-widget__side-slide--active'}
 						spaceBetween={10}
+						slidesPerView={4}
+						watchSlidesProgress={true}
 						navigation={true}
-						thumbs={{
-							swiper: thumbsSwiper,
-							autoScrollOffset: 1,
-						}}
 						modules={[FreeMode, Navigation, Thumbs]}
 						className="mySwiper2"
 						ref={sideSlider}
 						direction="vertical"
 					>
 						{sideSlidesList}
-					</Swiper>
-				</div>
-				<div className="catalog-widget__slider">
-					<Swiper
-						onSlideChange={swipeSideSlider}
-						spaceBetween={10}
-						slidesPerView={4}
-						freeMode={true}
-						watchSlidesProgress={true}
-						modules={[FreeMode, Navigation, Thumbs, Scrollbar, Mousewheel]}
-						thumbs={{ swiper: sideSlider.current }}
-						className="mySwiper"
-						ref={mainSlider}
-						direction="vertical"
-						mousewheel={{
-							invert: false,
-							sensitivity: 1,
-							// eventsTarget: '.mySwiper-wrapper',
-						}}
-					>
-						{slidesList}
 					</Swiper>
 				</div>
 			</div>

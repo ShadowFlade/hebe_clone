@@ -43,11 +43,11 @@ const config = {
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/i,
 				type: 'asset/resource',
-			  },
+			},
 			{
 				test: /\.svg$/,
 				exclude: /node_modules/,
-				use: [{loader:'@svgr/webpack',options: { icon: true }}],
+				use: [{ loader: '@svgr/webpack', options: { icon: true } }],
 			},
 			{
 				test: /\.tsx?$/,
