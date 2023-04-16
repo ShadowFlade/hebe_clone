@@ -1,102 +1,85 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode, Navigation, Thumbs, Pagination, Scrollbar, Mousewheel } from 'swiper';
+import { Swiper as SwiperType } from 'swiper/types';
+import { slides } from '../BigSlider/BigSlider';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import { FreeMode, Navigation, Thumbs, Pagination, Scrollbar, Mousewheel } from 'swiper';
-import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-import { Swiper as SwiperType } from 'swiper/types';
-import { slides } from '../BigSlider/BigSlider';
-import { nanoid } from 'nanoid';
-import SidePhotos from '../SidePhotos/SidePhotos';
 import './CatalogSliderWidget.scss';
 
-const CatalogSliderWidget = () => {
-	const renderCount = useRef(0);
-	renderCount.current += 1;
+type Slide = {
+	img: string;
+	caption: string;
+};
 
-	console.log(renderCount.current, ' renderCount');
-	const sideSlider = useRef<SwiperRef | null>(null);
-	const mainSlider = useRef<SwiperRef | null>(null);
+const CatalogSliderWidget: React.FC = () => {
+	const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+	const mainSwiperRef = useRef(null);
+	const activeIndex = useRef<number>(0);
 
-	const [thumbsSwiper, setThumbsSwiper] = useState<null | SwiperType | undefined>(
-		sideSlider.current?.swiper
-	);
-	const sidePhotosRef = useRef<typeof slides>([]);
-	const activeIndex = useRef(0);
-	const sideSlidesList = slides.map((slide) => {
-		sidePhotosRef.current.push(slide);
-		return (
-			<SwiperSlide key={nanoid()}>
+	const sideSlides = slides.map((slide) => (
+		<SwiperSlide key={slide.img}>
+			<img src={slide.img} />
+		</SwiperSlide>
+	));
+
+	const mainSlides = slides.map((slide) => (
+		<SwiperSlide key={slide.img}>
+			<div className="swiper-zoom-container">
 				<img src={slide.img} />
-			</SwiperSlide>
-		);
-	});
-	const slidesList = slides.map((slide) => {
-		sidePhotosRef.current.push(slide);
-		return (
-			<SwiperSlide key={nanoid()}>
-				<img src={slide.img} />
-			</SwiperSlide>
-		);
-	});
-	const style: { [el: string]: string } = {
-		'--swiper-navigation-color': '#fff',
-		'--swiper-pagination-color': '#fff',
+			</div>
+		</SwiperSlide>
+	));
+
+	const handleMainSlideChange = (swiper: SwiperType) => {
+		activeIndex.current = swiper.activeIndex;
+		// thumbsSwiper?.slideTo(activeIndex.current);
 	};
 
-	useEffect(() => {
-		console.log(sideSlider.current, ' thumb');
-		console.log(mainSlider.current, ' main slider');
-	});
+	const handleThumbClick = (index: number) => {
+		activeIndex.current = index;
+		const slider = mainSwiperRef?.current as unknown as SwiperType;
+		slider?.slideTo(activeIndex.current);
+	};
 
 	return (
-		<div key={nanoid()} className="catalog-widget">
-			<div className="catalog-widget__inner">
-				<div className="catalog-widget__side-slider">
-					<Swiper
-						style={style}
-						slideActiveClass={'catalog-widget__side-slide--active'}
-						spaceBetween={10}
-						slidesPerView={4}
-						watchSlidesProgress={true}
-						navigation={true}
-						modules={[FreeMode, Navigation, Thumbs]}
-						className="mySwiper2"
-						ref={sideSlider}
-						direction="vertical"
-					>
-						{sideSlidesList}
-					</Swiper>
-				</div>
-				<div className="catalog-widget__slider">
-					<Swiper
-						spaceBetween={10}
-						slidesPerView={1}
-						className="mySwiper"
-						watchSlidesProgress={true}
-						modules={[FreeMode, Navigation, Thumbs, Scrollbar, Mousewheel]}
-						onChange={() => {
-							console.log(mainSlider.current);
-							sideSlider.current?.swiper.update();
-						}}
-						onSwiper={() => {
-							mainSlider.current?.swiper.update();
-						}}
-						thumbs={{
-							swiper: sideSlider.current?.swiper,
-							// also tried `swiper:sideSlider.current`
-							thumbsContainerClass: 'catalog_widget__side',
-							slideThumbActiveClass: 'catalog-widget__side--active',
-						}}
-						direction="vertical"
-						ref={mainSlider}
-					>
-						{slidesList}
-					</Swiper>
-				</div>
+		<div className="catalog-slider-widget">
+			<div className="catalog-slider-widget__main">
+				<Swiper
+					modules={[Navigation, Thumbs]}
+					navigation
+					thumbs={{ swiper: thumbsSwiper }}
+					onSlideChange={handleMainSlideChange}
+					onSwiper={setThumbsSwiper}
+					ref={mainSwiperRef}
+				>
+					{mainSlides}
+				</Swiper>
+			</div>
+			<div className="catalog-slider-widget__thumbs">
+				<Swiper
+					onSwiper={setThumbsSwiper}
+					slidesPerView={4}
+					spaceBetween={10}
+					watchSlidesProgress={true}
+					slideToClickedSlide={true}
+					className="catalog-slider-widget__thumbs-swiper"
+				>
+					{sideSlides.map((slide, index) => (
+						<SwiperSlide
+							key={index}
+							onClick={() => handleThumbClick(index)}
+							className={index === activeIndex.current ? 'active' : ''}
+						>
+							{slide.props.children}
+						</SwiperSlide>
+					))}
+				</Swiper>
 			</div>
 		</div>
 	);
 };
+
 export default CatalogSliderWidget;
