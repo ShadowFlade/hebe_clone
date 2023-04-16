@@ -1,6 +1,10 @@
 .swiper-slide-thumb-active {
 	border: 2px solid yellow;
 }
+.swiper-slide-thumb-active ~ div {
+	border: none;
+}
+
 .catalog-slider-widget {
 	background-color: #caafa8;
 	padding: 2rem 0;
