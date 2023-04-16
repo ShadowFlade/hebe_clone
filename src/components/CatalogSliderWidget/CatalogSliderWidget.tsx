@@ -16,11 +16,11 @@ const CatalogSliderWidget = () => {
 	renderCount.current += 1;
 
 	console.log(renderCount.current, ' renderCount');
-	const sideSlider = useRef(null);
+	const sideSlider = useRef<SwiperRef | null>(null);
 	const mainSlider = useRef<SwiperRef | null>(null);
 
 	const [thumbsSwiper, setThumbsSwiper] = useState<null | SwiperType | undefined>(
-		sideSlider.current
+		sideSlider.current?.swiper
 	);
 	const sidePhotosRef = useRef<typeof slides>([]);
 	const activeIndex = useRef(0);
@@ -53,32 +53,6 @@ const CatalogSliderWidget = () => {
 	return (
 		<div key={nanoid()} className="catalog-widget">
 			<div className="catalog-widget__inner">
-				<div className="catalog-widget__slider">
-					<Swiper
-						spaceBetween={10}
-						slidesPerView={1}
-						className="mySwiper"
-						watchSlidesProgress={true}
-						modules={[FreeMode, Navigation, Thumbs, Scrollbar, Mousewheel]}
-						onChange={() => {
-							console.log(mainSlider.current);
-							mainSlider.current?.swiper.update();
-						}}
-						onSwiper={() => {
-							mainSlider.current?.swiper.update();
-						}}
-						thumbs={{
-							swiper: sideSlider.current,
-							// also tried `swiper:sideSlider.current`
-							thumbsContainerClass: 'catalog_widget__side',
-							slideThumbActiveClass: 'catalog-widget__side--active',
-						}}
-						direction="vertical"
-						ref={mainSlider}
-					>
-						{slidesList}
-					</Swiper>
-				</div>
 				<div className="catalog-widget__side-slider">
 					<Swiper
 						style={style}
@@ -93,6 +67,32 @@ const CatalogSliderWidget = () => {
 						direction="vertical"
 					>
 						{sideSlidesList}
+					</Swiper>
+				</div>
+				<div className="catalog-widget__slider">
+					<Swiper
+						spaceBetween={10}
+						slidesPerView={1}
+						className="mySwiper"
+						watchSlidesProgress={true}
+						modules={[FreeMode, Navigation, Thumbs, Scrollbar, Mousewheel]}
+						onChange={() => {
+							console.log(mainSlider.current);
+							sideSlider.current?.swiper.update();
+						}}
+						onSwiper={() => {
+							mainSlider.current?.swiper.update();
+						}}
+						thumbs={{
+							swiper: sideSlider.current?.swiper,
+							// also tried `swiper:sideSlider.current`
+							thumbsContainerClass: 'catalog_widget__side',
+							slideThumbActiveClass: 'catalog-widget__side--active',
+						}}
+						direction="vertical"
+						ref={mainSlider}
+					>
+						{slidesList}
 					</Swiper>
 				</div>
 			</div>
