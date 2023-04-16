@@ -15,6 +15,7 @@
 		float: left;
 		width: 80%;
 		order: 2;
+		display: flex;
 	}
 	&__thumbs {
 		float: left;
@@ -27,6 +28,9 @@
 			justify-content: center;
 			align-items: center;
 		}
+	}
+	&__info {
+		order: 3;
 	}
 }
 .swiper-wrapper {

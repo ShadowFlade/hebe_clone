@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import './CatalogSliderWidget.scss';
 import { nanoid } from 'nanoid';
+import CataloSliderWidgetInfo from '../CatalogSliderWidgetInfo/CatalogSliderWidgetInfo';
 
 type Slide = {
 	img: string;
@@ -64,6 +65,20 @@ const CatalogSliderWidget: React.FC = () => {
 					>
 						{mainSlides}
 					</Swiper>
+					<div className="catalog-slider-widget__info">
+						<CataloSliderWidgetInfo
+							productName="Bean Crossbody // Black"
+							color="black"
+							price="$449.00"
+							availability={true}
+							brand="saben"
+							description={['']}
+							shipping={[{ text: [''], title: '' }]}
+							returns={['']}
+							title={''}
+							labels={[]}
+						/>
+					</div>
 				</div>
 				<div className="catalog-slider-widget__thumbs">
 					<Swiper
