@@ -1,7 +1,91 @@
+$catalogWidgetTop:1.5rem;
+$catalogWidgetFont:1.25rem;
 .catalog-widget-info {
-	padding: 2rem 3rem;
+	height: 100%;
+	padding: 0 3rem;
 	&__inner {
-		display: flex;
-		flex-direction: vertical;
+		height:100%;
 	}
+	&__brand{
+		text-transform: capitalize;
+		font-size: .6875rem;
+		line-height: 18px;
+		letter-spacing: 2px;
+		word-spacing: 0;
+		font-weight: 300;
+		font-family: Montserrat, sans-serif;
+	}
+	&__price{
+		font-size: $catalogWidgetFont;
+		line-height: 2rem;
+		font-weight: 300;
+	}
+	&__labels{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size:$catalogWidgetFont
+
+	}
+	&__name{
+		font-size: 3.125rem;
+		line-height: 3.22rem;
+		font-weight: 500;
+	}
+	&__color{
+		margin-top:$catalogWidgetTop;
+		font-size:$catalogWidgetFont
+	}
+	&__color-circle{
+		width: 40px;
+		height: 40px;
+		display:block;
+		border-radius: 50%;
+		position:relative;
+		margin-top: 0.5rem;
+		&::before{
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 2;
+			border: 3px solid;
+			border-color: var(--colorBody);
+			border-radius: 100px;
+			box-shadow: inset 0 0 1px 1px #00000026;
+		}
+		&::after{
+			content: "";
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			z-index: 2;
+			border: 3px solid;
+			border-color: #CAAFA8;
+			border-radius: 100px;
+			box-shadow: inset 0 0 1px 1px #00000026;
+			top: 50%;
+			left: 50%;
+			width: 90%;
+			height: 90%;
+			transform: translate(-50%,-50%);
+		}
+		
+	}
+	&__availability{
+		margin-top:$catalogWidgetTop;
+		font-size:$catalogWidgetFont;
+		display:block;
+		width:100%;
+		padding:1rem 0;
+		background-color: white;
+	}
+	&__information{
+		margin-top:$catalogWidgetTop;
+		font-size:$catalogWidgetFont
+	}
+
 }
+

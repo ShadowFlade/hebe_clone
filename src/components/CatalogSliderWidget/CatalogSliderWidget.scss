@@ -16,6 +16,7 @@
 		width: 80%;
 		order: 2;
 		display: flex;
+		position:relative;
 	}
 	&__thumbs {
 		float: left;
@@ -30,7 +31,13 @@
 		}
 	}
 	&__info {
+		position:absolute;
+		top:0;
+		right:0;
 		order: 3;
+		width: 60%;
+		height: 100%;
+		color:white;
 	}
 }
 .swiper-wrapper {
