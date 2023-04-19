@@ -1,3 +1,4 @@
+@use 'sass:color';
 $catalogWidgetTop: 1.5rem;
 $catalogWidgetFont: 1.25rem;
 .catalog-widget-info {
@@ -72,6 +73,7 @@ $catalogWidgetFont: 1.25rem;
 			transform: translate(-50%, -50%);
 		}
 	}
+
 	&__availability {
 		margin-top: $catalogWidgetTop;
 		font-size: $catalogWidgetFont;
@@ -80,12 +82,31 @@ $catalogWidgetFont: 1.25rem;
 		padding: 1rem 0;
 		background-color: white;
 	}
+
 	&__information {
 		margin-top: $catalogWidgetTop;
 		font-size: $catalogWidgetFont;
 	}
+
+	&__tabs {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 	&__tab {
+		cursor: pointer;
 		position: relative;
-		z-index: 10;
+		z-index: 2;
+		&:active {
+			color: darken(white, 50%);
+		}
+	}
+
+	&__text-wrapper {
+		margin-top: 3rem;
+	}
+
+	&__text--hidden {
+		display: none;
 	}
 }

@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import './CatalogSliderWidget.scss';
 import { nanoid } from 'nanoid';
+import infoData from './widget';
 import CataloSliderWidgetInfo from '../CatalogSliderWidgetInfo/CatalogSliderWidgetInfo';
 
 type Slide = {
@@ -45,7 +46,7 @@ const CatalogSliderWidget: React.FC = () => {
 		const slider = mainSwiperRef?.current as unknown as SwiperType;
 		slider?.slideTo(activeIndex.current);
 	};
-
+	console.log(infoData);
 	return (
 		<div className="catalog-slider-widget">
 			<div className="catalog-slider-widget__inner">
@@ -72,9 +73,9 @@ const CatalogSliderWidget: React.FC = () => {
 							price="$449.00"
 							availability={true}
 							brand="saben"
-							description={['']}
-							shipping={[{ text: [''], title: '' }]}
-							returns={['']}
+							descriptionText={infoData.description}
+							shippingText={[{ text: [''], title: '' }]}
+							returnsText={['']}
 							title={''}
 							labels={[]}
 						/>

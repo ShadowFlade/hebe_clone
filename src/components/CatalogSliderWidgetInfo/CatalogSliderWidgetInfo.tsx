@@ -1,6 +1,8 @@
 import * as React from 'react';
 import './CatalogSliderWIdgetInfo.scss';
+import CatalogWidgetInfoTab from '../CatalogWidgetInfoTab/CatalogWidgetInfoTab';
 import { useState } from 'react';
+import data from '../CatalogSliderWidget/widget';
 
 type ICataloSliderWidgetInfoProps = {
 	title: string;
@@ -10,9 +12,9 @@ type ICataloSliderWidgetInfoProps = {
 	labels: string[];
 	color: string;
 	availability: boolean;
-	description: string[];
-	shipping: ShippingItem[];
-	returns: string[];
+	descriptionText: { text: string[] };
+	shippingText: ShippingItem[];
+	returnsText: string[];
 	productName: string;
 };
 type ShippingItem = {
@@ -32,14 +34,14 @@ const CataloSliderWidgetInfo = ({
 	labels,
 	color,
 	availability: isAvailable,
-	description,
-	shipping,
-	returns,
+	descriptionText,
+	shippingText,
+	returnsText,
 	productName,
 }: ICataloSliderWidgetInfoProps) => {
-	const [descriptionTabVisible, setDescriptionTabVisible] = useState(true);
-	const [shippingTabVisible, setShippingTabVisible] = useState(false);
-	const [returnsTabVisible, setReturnsTabVisible] = useState(false);
+	const [isDescriptionTabVisible, setIsDescriptionTabVisible] = useState(true);
+	const [isShippingTabVisible, setIsShippingTabVisible] = useState(false);
+	const [isReturnsTabVisible, setIsReturnsTabVisible] = useState(false);
 	const [tabsState, setTabsState] = useState({
 		isDescriptionOpen: true,
 		isShippingOpen: false,
@@ -47,19 +49,22 @@ const CataloSliderWidgetInfo = ({
 	});
 	const handleTabsState = (stateToSetTrue: string) => {
 		const newObject = { ...tabsState };
-
 		for (const key in newObject) {
 			const newKey = key as unknown as keyof typeof tabsState;
 			if (key.toLocaleLowerCase().includes(stateToSetTrue)) {
-				console.log('true');
-				newObject[newKey] = false;
-			} else {
-				console.log(key, stateToSetTrue);
-				console.log('false');
 				newObject[newKey] = true;
+			} else {
+				newObject[newKey] = false;
 			}
 		}
+		console.log(newObject);
 		setTabsState(newObject);
+	};
+	const visibilityHandler = (event: React.MouseEvent<HTMLElement>) => {
+		const target = event.target as HTMLElement;
+		if (target.textContent) {
+			handleTabsState(target.textContent?.toLocaleLowerCase());
+		}
 	};
 
 	return (
@@ -90,21 +95,30 @@ const CataloSliderWidgetInfo = ({
 				</button>
 				<div className="catalog-widget-info__information">
 					<div className="catalog-widget-info__tabs">
-						<span
-							className="catalog-widget-info__tab"
-							onClick={(event: React.MouseEvent<HTMLElement>) => {
-								const target = event.target as HTMLElement;
-								if (target.textContent) {
-									handleTabsState(target.textContent?.toLocaleLowerCase());
-								}
-							}}
-						>
+						<span className="catalog-widget-info__tab" onClick={visibilityHandler}>
 							Description
 						</span>
-						<span className="catalog-widget-info__tab">Shipping</span>
-						<span className="catalog-widget-info__tab">Returns</span>
+						<span className="catalog-widget-info__tab" onClick={visibilityHandler}>
+							Shipping
+						</span>
+						<span className="catalog-widget-info__tab" onClick={visibilityHandler}>
+							Returns
+						</span>
 					</div>
-					<p className="catalog-widget-info__text"></p>
+					<div className="catalog-widget-info__text-wrapper">
+						<CatalogWidgetInfoTab
+							isOpen={tabsState.isDescriptionOpen}
+							data={data.description}
+						/>
+						<CatalogWidgetInfoTab
+							isOpen={tabsState.isShippingOpen}
+							data={data.shipping}
+						/>
+						<CatalogWidgetInfoTab
+							isOpen={tabsState.isReturnsOpen}
+							data={data.returns}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
