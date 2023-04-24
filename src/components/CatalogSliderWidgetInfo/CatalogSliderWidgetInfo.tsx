@@ -3,6 +3,7 @@ import './CatalogSliderWIdgetInfo.scss';
 import CatalogWidgetInfoTab from '../CatalogWidgetInfoTab/CatalogWidgetInfoTab';
 import { useState } from 'react';
 import data from '../CatalogSliderWidget/widget';
+import classNames from 'classnames';
 
 type ICataloSliderWidgetInfoProps = {
 	title: string;
@@ -42,6 +43,9 @@ const CataloSliderWidgetInfo = ({
 	const [isDescriptionTabVisible, setIsDescriptionTabVisible] = useState(true);
 	const [isShippingTabVisible, setIsShippingTabVisible] = useState(false);
 	const [isReturnsTabVisible, setIsReturnsTabVisible] = useState(false);
+	const infoTabClass = classNames({
+		'catalog-widget-info__tab': true,
+	});
 	const [tabsState, setTabsState] = useState({
 		isDescriptionOpen: true,
 		isShippingOpen: false,
@@ -95,13 +99,30 @@ const CataloSliderWidgetInfo = ({
 				</button>
 				<div className="catalog-widget-info__information">
 					<div className="catalog-widget-info__tabs">
-						<span className="catalog-widget-info__tab" onClick={visibilityHandler}>
+						<span
+							className={`${infoTabClass} catalog-widget-info__tab--description ${
+								tabsState.isDescriptionOpen
+									? 'catalog-widget-info__tab--active'
+									: ''
+							}`}
+							onClick={visibilityHandler}
+						>
 							Description
 						</span>
-						<span className="catalog-widget-info__tab" onClick={visibilityHandler}>
+						<span
+							className={`${infoTabClass} catalog-widget-info__tab--shipping ${
+								tabsState.isShippingOpen ? 'catalog-widget-info__tab--active' : ''
+							}`}
+							onClick={visibilityHandler}
+						>
 							Shipping
 						</span>
-						<span className="catalog-widget-info__tab" onClick={visibilityHandler}>
+						<span
+							className={`${infoTabClass} catalog-widget-info__tab--returns ${
+								tabsState.isReturnsOpen ? 'catalog-widget-info__tab--active' : ''
+							}`}
+							onClick={visibilityHandler}
+						>
 							Returns
 						</span>
 					</div>

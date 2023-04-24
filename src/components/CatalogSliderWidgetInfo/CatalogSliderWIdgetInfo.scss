@@ -1,6 +1,7 @@
 @use 'sass:color';
 $catalogWidgetTop: 1.5rem;
 $catalogWidgetFont: 1.25rem;
+$color: white;
 .catalog-widget-info {
 	height: 100%;
 	padding: 0 3rem;
@@ -97,9 +98,24 @@ $catalogWidgetFont: 1.25rem;
 		cursor: pointer;
 		position: relative;
 		z-index: 2;
+		padding-bottom: 0.5rem;
+		border-bottom: 2px solid $color;
+		border-width: 0;
 		&:active {
-			color: darken(white, 50%);
+			color: darken($color, 50%);
 		}
+		&::after {
+			content: '';
+			width: 0;
+			height: 2px;
+			background-color: $color;
+			position: absolute;
+			bottom: 0;
+		}
+		// &--active .catalog-widget-info__tab::after {
+		// 	width: 100%;
+		// 	transition: all 0.15s linear;
+		// }
 	}
 
 	&__text-wrapper {
@@ -109,4 +125,8 @@ $catalogWidgetFont: 1.25rem;
 	&__text--hidden {
 		display: none;
 	}
+}
+.catalog-widget-info__tab--active .catalog-widget-info__tab::after {
+	width: 100%;
+	transition: all 0.15s linear;
 }
