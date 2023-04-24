@@ -5,6 +5,7 @@ import BigSlider from '@/components/BigSlider/BigSlider';
 import { nanoid } from 'nanoid';
 import Brands from '@/components/Brands/Brands';
 import CatalogSliderWidget from '@/components/CatalogSliderWidget/CatalogSliderWidget';
+import './MainPage.scss';
 
 type MainPage = {};
 const text =

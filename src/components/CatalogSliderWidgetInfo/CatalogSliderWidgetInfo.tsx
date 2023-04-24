@@ -43,14 +43,17 @@ const CataloSliderWidgetInfo = ({
 	const [isDescriptionTabVisible, setIsDescriptionTabVisible] = useState(true);
 	const [isShippingTabVisible, setIsShippingTabVisible] = useState(false);
 	const [isReturnsTabVisible, setIsReturnsTabVisible] = useState(false);
+
 	const infoTabClass = classNames({
 		'catalog-widget-info__tab': true,
 	});
+
 	const [tabsState, setTabsState] = useState({
 		isDescriptionOpen: true,
 		isShippingOpen: false,
 		isReturnsOpen: false,
 	});
+
 	const handleTabsState = (stateToSetTrue: string) => {
 		const newObject = { ...tabsState };
 		for (const key in newObject) {
@@ -64,6 +67,7 @@ const CataloSliderWidgetInfo = ({
 		console.log(newObject);
 		setTabsState(newObject);
 	};
+
 	const visibilityHandler = (event: React.MouseEvent<HTMLElement>) => {
 		const target = event.target as HTMLElement;
 		if (target.textContent) {
