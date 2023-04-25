@@ -16,20 +16,24 @@ type SliderBigItemProps = {
 };
 
 const SliderBigItem = ({ img, sizes, name, section, price, extraImg }: SliderBigItemProps) => {
-
 	extraImg ? extraImg.unshift(img) : null;
 	const swiperRef = useRef<SwiperRef | null>(null);
 	const handleAutoplayDelayChange = (delay: number) => {
 		const options = swiperRef.current?.swiper?.params?.autoplay as AutoplayOptions;
 		options.delay = delay;
 		swiperRef.current?.swiper.update(); // update the Swiper instance to apply the new autoplay delay
-	  };
+	};
 	const onMouseEnter = (e: React.MouseEvent) => {
 		handleAutoplayDelayChange(500);
-			swiperRef.current && swiperRef.current.swiper.autoplay.run();
+		swiperRef.current && swiperRef.current.swiper.autoplay.run();
 	};
-	const onMouseLeave = () => {
+	const stopAutoPlay = () => {
 		swiperRef.current && swiperRef.current.swiper.autoplay.pause();
+		swiperRef.current ? (swiperRef.current.swiper.autoplay.paused = true) : false;
+		console.log(
+			swiperRef.current ? swiperRef.current.swiper.autoplay.paused : 'not working',
+			' small slider'
+		);
 	};
 
 	return (
@@ -38,7 +42,9 @@ const SliderBigItem = ({ img, sizes, name, section, price, extraImg }: SliderBig
 				<div
 					className="slider-big-item__photo"
 					onMouseOver={onMouseEnter}
-					onMouseOut={onMouseLeave}
+					onMouseOut={stopAutoPlay}
+					onClick={stopAutoPlay}
+					onBlur={stopAutoPlay}
 				>
 					<SwiperEl
 						ref={swiperRef}
@@ -47,7 +53,9 @@ const SliderBigItem = ({ img, sizes, name, section, price, extraImg }: SliderBig
 						loop
 						effect="fade"
 						autoplay={undefined}
-						onInit={()=>{swiperRef.current?.swiper.autoplay.pause()}}
+						onInit={() => {
+							swiperRef.current?.swiper.autoplay.pause();
+						}}
 					>
 						{extraImg?.map((item) => {
 							return (
