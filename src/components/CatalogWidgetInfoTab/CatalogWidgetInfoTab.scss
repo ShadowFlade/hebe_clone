@@ -1,0 +1,20 @@
+.catalog-info-tab {
+	position: relative;
+	z-index: 10;
+	&:first-child {
+		margin-left: 0;
+	}
+	&__paragraph {
+		margin-top: 3rem;
+	}
+	&__text {
+		margin-top: 1.3rem;
+		line-height: 1.5;
+	}
+	&--hidden {
+		display: none;
+	}
+	&__title {
+		font-size: 2rem;
+	}
+}

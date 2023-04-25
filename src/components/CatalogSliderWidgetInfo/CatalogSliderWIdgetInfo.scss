@@ -1,0 +1,136 @@
+@use 'sass:color';
+$buttonBgColor: white;
+$catalogWidgetTop: 1.5rem;
+$catalogWidgetFont: 1.25rem;
+$color: white;
+.catalog-widget-info {
+	height: 100%;
+	padding: 0 3rem;
+	&__inner {
+		height: 100%;
+	}
+	&__brand {
+		text-transform: capitalize;
+		font-size: 0.6875rem;
+		line-height: 18px;
+		letter-spacing: 2px;
+		word-spacing: 0;
+		font-weight: 300;
+		font-family: Montserrat, sans-serif;
+	}
+	&__price {
+		font-size: $catalogWidgetFont;
+		line-height: 2rem;
+		font-weight: 300;
+	}
+	&__labels {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: $catalogWidgetFont;
+	}
+	&__name {
+		font-size: 3.125rem;
+		line-height: 3.22rem;
+		font-weight: 500;
+	}
+	&__color {
+		margin-top: $catalogWidgetTop;
+		font-size: $catalogWidgetFont;
+	}
+	&__color-circle {
+		width: 40px;
+		height: 40px;
+		display: block;
+		border-radius: 50%;
+		position: relative;
+		margin-top: 0.5rem;
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 2;
+			border: 3px solid;
+			border-color: var(--colorBody);
+			border-radius: 100px;
+			box-shadow: inset 0 0 1px 1px #00000026;
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			z-index: 2;
+			border: 3px solid;
+			border-color: #caafa8;
+			border-radius: 100px;
+			box-shadow: inset 0 0 1px 1px #00000026;
+			top: 50%;
+			left: 50%;
+			width: 90%;
+			height: 90%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	&__availability {
+		margin-top: $catalogWidgetTop;
+		font-size: $catalogWidgetFont;
+		display: block;
+		width: 100%;
+		padding: 1rem 0;
+		background-color: $buttonBgColor;
+		&:hover {
+			background-color: darken($buttonBgColor, 15%);
+			color: lighten($buttonBgColor, 15%);
+			box-shadow: 0px 0px 2px 2px darken($buttonBgColor, 15%);
+		}
+	}
+
+	&__information {
+		margin-top: $catalogWidgetTop;
+		font-size: $catalogWidgetFont;
+	}
+
+	&__tabs {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__tab {
+		cursor: pointer;
+		position: relative;
+		z-index: 2;
+		padding-bottom: 0.5rem;
+		border-bottom: 2px solid $color;
+		border-width: 0;
+		&:active {
+			color: darken($color, 50%);
+		}
+		&::after {
+			content: '';
+			width: 0;
+			height: 2px;
+			background-color: $color;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
+		&--active.catalog-widget-info__tab::after {
+			width: 100%;
+			transition: all 0.5s cubic-bezier(0.36, 0.37, 0.61, 0.56);
+		}
+	}
+
+	&__text-wrapper {
+		margin-top: 3rem;
+	}
+
+	&__text--hidden {
+		display: none;
+	}
+}

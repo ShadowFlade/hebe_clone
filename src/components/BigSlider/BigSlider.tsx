@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y, Navigation, Scrollbar, SwiperOptions } from 'swiper';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+import { A11y, Navigation, Scrollbar, SwiperOptions, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
@@ -36,8 +36,15 @@ import woman7_2 from './woman7_2.jpg';
 import woman7_3 from './woman7_3.jpg';
 
 import './BigSlider.scss';
-import SlidesList from '../SlidesList';
 
+export type slide = {
+	img: string;
+	extraImg: string[];
+	sizes: string[];
+	name: string;
+	section: string;
+	price: string;
+};
 const slides = [
 	{
 		img: woman,
@@ -97,24 +104,31 @@ const slides = [
 	},
 ];
 
-const preloadImages = () => {
-	slides.forEach(({ img }) => {
-		const image = new Image();
-		image.src = img;
-	});
-};
-
 const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
-	preloadImages();
 	const [isInFocus, setIsInFocus] = useState(false);
-	const isInFocusRef = React.useRef(false);
-	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
-		// isInFocusRef.current = true;
-		setIsInFocus(true);
+	const swiperRef = useRef(null);
+	const preloadImages = React.useCallback(() => {
+		slides.forEach(({ img }) => {
+			const image = new Image();
+			image.src = img;
+		});
 	}, []);
+	const SLIDE_DELAY = 1000;
+
+	preloadImages();
+
+	const onMouseEnter = React.useCallback((e: React.MouseEvent) => {
+		const swiperEl = swiperRef.current as unknown as SwiperRef;
+		setIsInFocus(true);
+		swiperEl.swiper.autoplay.pause();
+		swiperEl.swiper.autoplay.paused = true;
+	}, []);
+
 	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
-		// isInFocusRef.current = false;
 		setIsInFocus(false);
+		const swiperEl = swiperRef.current as unknown as SwiperRef;
+		swiperEl.swiper.autoplay.paused = false;
+		swiperEl.swiper.autoplay.run();
 	}, []);
 
 	const slidesList = React.useMemo(() => {
@@ -152,15 +166,19 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 
 			<div className="big-slider__inner">
 				<Swiper
+					ref={swiperRef}
 					spaceBetween={spaceBetween}
 					slidesPerView={slidesPerView}
-					modules={[Navigation, A11y, Scrollbar]}
+					modules={[Navigation, A11y, Scrollbar, Autoplay]}
 					navigation
 					scrollbar={{ draggable: true }}
 					watchSlidesProgress
-					speed={200}
+					speed={SLIDE_DELAY / 2}
+					effect="cards"
+					autoplay={{
+						delay: SLIDE_DELAY,
+					}}
 				>
-					{/* {<SlidesList />} */}
 					{slidesList}
 				</Swiper>
 			</div>
