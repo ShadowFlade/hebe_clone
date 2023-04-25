@@ -121,11 +121,13 @@ const BigSlider = ({ spaceBetween, slidesPerView }: SwiperOptions) => {
 		const swiperEl = swiperRef.current as unknown as SwiperRef;
 		setIsInFocus(true);
 		swiperEl.swiper.autoplay.pause();
+		swiperEl.swiper.autoplay.paused = true;
 	}, []);
 
 	const onMouseLeave = React.useCallback((e: React.MouseEvent) => {
 		setIsInFocus(false);
 		const swiperEl = swiperRef.current as unknown as SwiperRef;
+		swiperEl.swiper.autoplay.paused = false;
 		swiperEl.swiper.autoplay.run();
 	}, []);
 

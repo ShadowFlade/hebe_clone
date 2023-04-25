@@ -38,7 +38,6 @@ const CatalogSliderWidget: React.FC = () => {
 
 	const handleMainSlideChange = (swiper: SwiperType) => {
 		activeIndex.current = swiper.activeIndex;
-		console.log(swiper.activeIndex, ' swiper active index');
 	};
 
 	const handleThumbClick = (index: number) => {
