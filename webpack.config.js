@@ -20,7 +20,7 @@ const config = {
 		path: paths.dist,
 		chunkFilename: '[name].bundle.js',
 		filename: '[name].bundle.js',
-		publicPath: '/',
+		publicPath: isProd ? '/hebe_clone/' : '/',
 		clean: true,
 	},
 	resolve: {

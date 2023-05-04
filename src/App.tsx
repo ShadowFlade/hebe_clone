@@ -7,10 +7,12 @@ import { Context } from './context/context';
 export default function App() {
 	const context = useContext(Context);
 	const appRef = context.refs.appRef;
+
+	const basePath = process.env.NODE_ENV == 'development' ? '/' : '/hebe_clone';
 	return (
 		<div ref={appRef} className="app">
 			<Routes>
-				<Route path={'/'} element={<Layout />}>
+				<Route path={basePath} element={<Layout />}>
 					<Route index element={<MainPage />} />
 				</Route>
 			</Routes>
